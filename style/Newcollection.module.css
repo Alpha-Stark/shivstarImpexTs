@@ -1,0 +1,80 @@
+.container {
+    margin: 30px;
+    width: 90%;
+    margin: 3rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.headerText {
+    text-align: left;
+    color: #171616;
+    font-weight: 400;
+}
+
+.headerText h1 {
+    font-size: 1.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: black;
+}
+
+.headerText p {
+    font-size: 16px;
+}
+
+.viewAllButton button {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-weight: light;
+    text-decoration: underline;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    overflow: hidden;
+    transition: transform 0.4s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card h3 {
+    margin: 10px;
+    font-size: 1.2em;
+    text-align: left;
+    color: #333;
+}
+
+.card p {
+    margin: 10px;
+    font-size: 14px;
+    text-align: left;
+    color: gray;
+}
+
+.card .price {
+    color: #000;
+    font-weight: bold;
+}
