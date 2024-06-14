@@ -52,10 +52,11 @@ function Bestseller() {
                 <div className={styles.grid}>
                     {products.map((product) => (
                         <div key={product.id} className={styles.card}>
-                            <img src={product.imgSrc} alt={product.name} />
-                            <h3>{product.name}</h3>
+                            <img src={product.imgSrc} alt={product.title} />
+                            <h3>{product.title}</h3>
                             <p>{product.description}</p>
                             <p className={styles.price}>{product.price}</p>
+
                         </div>
                     ))}
                 </div>
