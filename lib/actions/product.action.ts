@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import User from "@/lib/database/models/user.model";
 import Product from "@/lib/database/models/product.model";
 
-export const createUser = async (user) => {
+export const createUser = async (user: any) => {
     //** refer docs on serverless function (https://vercel.com/docs/functions/serverless-functions)
     try {
         await connectToDatabase(); //cached connection.
@@ -17,7 +17,7 @@ export const createUser = async (user) => {
     }
 };
 
-export async function getUserById(userId) {
+export async function getUserById(userId: string) {
     try {
         await connectToDatabase();
 
@@ -30,7 +30,7 @@ export async function getUserById(userId) {
     }
 }
 
-export async function updateUser(clerkId, user) {
+export async function updateUser(clerkId: string, user: any) {
     try {
         await connectToDatabase();
 
@@ -43,7 +43,7 @@ export async function updateUser(clerkId, user) {
     }
 }
 
-export async function deleteUser(clerkId) {
+export async function deleteUser(clerkId: string) {
     try {
         await connectToDatabase();
 
@@ -55,18 +55,13 @@ export async function deleteUser(clerkId) {
         }
 
         // Unlink relationships
-        await Promise.all([
+        /* await Promise.all([
             // Update the 'events' collection to remove references to the user
             Event.updateMany({ _id: { $in: userToDelete.events } }, { $pull: { organizer: userToDelete._id } }),
-            /** Accroach to understand such query is to move from in to out of the brackets. (or in some sense, right to left).
-             * [below comments is i think wrong, so ignore]
-             * So for us(finding condition), understand like, It targets documents[events] where the _id field is in the array userToDelete.events.
-             * And now the update operation: is to pull out[remove] all the userToDelete._id which are in the organizer's object of selected events. [Something like this]. Do this in the found documents[through finding condition].
-             */
-
+           
             // Update the 'orders' collection to remove references to the user
             Order.updateMany({ _id: { $in: userToDelete.orders } }, { $unset: { buyer: 1 } }),
-        ]);
+        ]); */
 
         // Delete user
         const deletedUser = await User.findByIdAndDelete(userToDelete._id);
