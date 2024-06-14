@@ -24,7 +24,7 @@ export const CategoriesSection = () => {
         });
     }, []);
 
-    const handleMouseEnter = (image) => {
+    const handleMouseEnter = (image: any) => {
         setHoverImg(image);
     };
 
