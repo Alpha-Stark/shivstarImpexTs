@@ -4,23 +4,12 @@
   position: fixed;
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
   height: 10vh;
   z-index: 10;
-}
-
-.navbaronly .navbar-link {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  margin: 0.5rem;
-}
-
-.navbaronly .navbar-link:hover{
-  text-decoration: underline;
+  flex-direction: column; /* Default to column for small screens */
 }
 
 .navbar-logo {
@@ -34,26 +23,29 @@
   font-family: Arial, sans-serif;
 }
 
-@media (min-width: 768px) {
-  .navbaronly {
-      flex-direction: row;
-  }
-  .navbar-link {
-      font-size: 1.25rem;
-      margin: 0 1rem;
-  }
-  .navbar-logo h4 {
-      font-size: 2rem;
-      margin-left: 1rem;
-  }
+.navbarlinks {
+  display: flex;
+  flex-direction: column; /* Default to column for small screens */
+  justify-content: center;
+  width: 100%;
+  align-items: center;
 }
 
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  margin: 0.5rem;
+}
 
-/*  */
-/*  */
-/*  */
+.navbar-link:hover {
+  text-decoration: underline;
+}
 
-/* styles.module.css */
+.navbarbuttons {
+  display: flex;
+  align-items: center;
+}
 
 .button {
   /* Text Color */
@@ -104,4 +96,22 @@
   padding-bottom: 0.625rem;
   margin-right: 0.5rem; /* Equivalent to Tailwind's me-2 */
   margin-bottom: 0.5rem; /* Equivalent to Tailwind's mb-2 */
+}
+
+@media (min-width: 768px) {
+  .navbaronly {
+    flex-direction: row; /* Change to row for larger screens */
+  }
+  .navbarlinks {
+    flex-direction: row; /* Change to row for larger screens */
+    width: auto;
+  }
+  .navbar-link {
+    font-size: 1.25rem;
+    margin: 0 1rem;
+  }
+  .navbar-logo h4 {
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
 }

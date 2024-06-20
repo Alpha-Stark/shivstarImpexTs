@@ -15,7 +15,7 @@ function Navbar() {
                     <h4>SHIVSTAR IMPEX</h4>
                 </Link>
             </div>
-            <div className="flex flex-col md:flex-row md:ml-4 w-full md:w-auto justify-center md:justify-end">
+            <div className={styles.navbarlinks}>
                 <Link href="/diamonds" className={`${styles["navbar-link"]} my-1 md:my-0 mx-2 md:mx-4 p-1`}>
                     Diamonds
                 </Link>
@@ -35,7 +35,7 @@ function Navbar() {
                     Bag
                 </Link>
             </div>
-            <div className="flex items-center">
+            <div className={styles.navbarbuttons}>
                 <SignedOut>
                     <SignInButton>
                         <button className={`${styles.button} ${styles.dark}`}>Login</button>
