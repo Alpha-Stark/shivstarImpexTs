@@ -8,8 +8,7 @@ import Link from "next/link";
 
 function Navbar() {
     return (
-        // <div className={styles.navbaronly}>
-        <div className={`${styles.navbaronly} fixed top-0 left-0 w-full bg-white shadow-md z-50`}>
+        <div className={styles.navbaronly}>
             <div className={styles["navbar-logo"]}>
                 <Link href="/" className="flex items-center p-1">
                     <Image src={logo} alt="Logo" width={85} height={55} />
