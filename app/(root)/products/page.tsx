@@ -11,13 +11,13 @@ interface Product {
 }
 
 function AllProducts() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Product[]>([]);
     const [page, setPage] = useState(1);
     const [Loading, setLoading] = useState(false);
     const [Err, setErr] = useState(false);
 
     // fetch data function to fetch data from the mongodb database
-    const products = [
+    const products: Product[] = [
         {
             avatar: "https://gem-garden-jewelry-store.vercel.app/static/media/card5.471f0f73c03a3ce42177.png",
             brand: "Messika",
@@ -130,8 +130,8 @@ function AllProducts() {
 
             let res = axios.get("https://traveller-jt36.onrender.com/jewellery?_page=1&_limit=12");
             // const result: Product[] = res;
-            setData(res);
-            // setData(products);
+            // setData(res);
+            setData(products);
             setLoading(false);
         } catch (err) {
             setLoading(false);
@@ -177,7 +177,10 @@ function AllProducts() {
     const handleClick = (val: any) => {
         setPage(page + val);
     };
-    const [isHovered, setIsHovered] = useState(false);
+    /*  const [isHovered, setIsHovered] = useState(false);
+     const handleMouseEnter = () => {
+         setIsHovered(true);
+     } */
 
     return (
         <div style={{ paddingTop: "115px", paddingBottom: "0px" }}>
@@ -204,10 +207,12 @@ function AllProducts() {
                             height: "320px",
                             transition: "transform 0.4s",
                             cursor: "pointer",
-                            transform: isHovered ? "scale(1.02)" : "none",
+                            // transform: isHovered ? "scale(1.02)" : "none",
+                            // hover: "scale(1.02)",
                         }}
                     >
                         <img src={ele.avatar} style={{ width: "200px", margin: "auto" }} alt="Item" />
+                        {/* <Image src={ele.avatar} alt="Item" width={200} height={200} margin="auto" /> */}
                         <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
                             <div style={{ display: "flex", flexDirection: "column", gap: "2%" }}>
                                 <h6 style={{ textAlign: "left" }}>{ele.brand}</h6>
