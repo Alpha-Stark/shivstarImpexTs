@@ -8,7 +8,7 @@ export default function RootLayout({ children }: {
     return (
         <div className="bg-white">
             <Navbar />
-            <main>{children}</main>
+            <main className="pt-16">{children}</main>
             <Footer />
         </div>
     );

@@ -17,10 +17,10 @@ export const MainPagemainComponent = () => {
                     <Text textAlign="left" color="white">
                         DISCOVER
                     </Text>
+                    <Spacer />
+                    <Box w="60%" className={styles.mainhands}></Box>
                 </VStack>
             </HStack>
-            <Spacer />
-            <Box w="60%" className={styles.mainhands}></Box>
         </Flex>
     );
 };

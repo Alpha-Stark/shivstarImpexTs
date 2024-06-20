@@ -5,69 +5,134 @@ import { revalidatePath } from "next/cache";
 import User from "@/lib/database/models/user.model";
 import Product from "@/lib/database/models/product.model";
 
-export const createUser = async (user: any) => {
-    //** refer docs on serverless function (https://vercel.com/docs/functions/serverless-functions)
-    try {
-        await connectToDatabase(); //cached connection.
-        const newUser = await User.create(user);
+type productPropSchema = {
+    _id?: string;
+    name: string;
+    description: string;
+    price: string;
+    stock: string;
+    photo: string;
+    colorFrom: string;
+    colorTo: string;
+    clarityFrom: string;
+    clarityTo: string;
+    cut: string;
+    carat: string;
+    shape: string;
+    certificate: string;
+};
 
-        return JSON.parse(JSON.stringify(newUser)); //we do this to return a general Javascript object of the user and not the mongodb document.
+
+export const createProduct = async (product: productPropSchema) => {
+    try {
+        await connectToDatabase();
+        const newProduct = await Product.create(product);
+
+        return JSON.parse(JSON.stringify(newProduct));
     } catch (error) {
         handleError(error);
     }
 };
 
-export async function getUserById(userId: string) {
+export async function getProductById(productId: string) {
     try {
         await connectToDatabase();
 
-        const user = await User.findById(userId);
+        const product = await Product.findById(productId);
 
-        if (!user) throw new Error("User not found");
-        return JSON.parse(JSON.stringify(user));
+        if (!product) throw new Error("Product not found");
+        return JSON.parse(JSON.stringify(product));
     } catch (error) {
         handleError(error);
     }
 }
 
-export async function updateUser(clerkId: string, user: any) {
+export async function updateProduct(productId: string, product: productPropSchema) {
     try {
         await connectToDatabase();
 
-        const updatedUser = await User.findOneAndUpdate({ clerkId }, user, { new: true });
+        const updatedProduct = await Product.findOneAndUpdate({ _id: productId }, product, { new: true });
 
-        if (!updatedUser) throw new Error("User update failed");
-        return JSON.parse(JSON.stringify(updatedUser));
+        if (!updatedProduct) throw new Error("Product update failed");
+        return JSON.parse(JSON.stringify(updatedProduct));
     } catch (error) {
         handleError(error);
     }
 }
 
-export async function deleteUser(clerkId: string) {
+type DeleteProductParams = {
+    productId: string
+    path: string
+}
+
+export async function deleteProduct({ productId, path }: DeleteProductParams) {
     try {
         await connectToDatabase();
 
-        // Find user to delete
-        const userToDelete = await User.findOne({ clerkId });
+        // Find product to delete
+        const deleteProduct = await Product.findByIdAndDelete(productId);
 
-        if (!userToDelete) {
-            throw new Error("User not found");
+        if (deleteProduct) revalidatePath(path);
+
+        /* // Delete product
+        const deletedProduct = await Product.findByIdAndDelete(productToDelete._id);
+
+
+        return deletedProduct ? JSON.parse(JSON.stringify(deletedProduct)) : null; */
+
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+/* export async function getAllProducts() {
+    try {
+        await connectToDatabase();
+        const products = await Product.find();
+
+        return JSON.parse(JSON.stringify(products));
+    } catch (error) {
+        handleError(error);
+    }
+} */
+
+type GetAllProductsParams = {
+    query: string
+    limit: number
+    page: number
+}
+
+export async function getAllProducts({ query, limit = 6, page }: GetAllProductsParams) {
+    try {
+        await connectToDatabase()
+
+        /* const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {}
+        const categoryCondition = category ? await getCategoryByName(category) : null
+        const conditions = {
+            $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
+        } */
+        const titleCondition = query ? { title: { $regex: `.*${query}.*`, $options: 'i' } } : {};
+        const conditions = {
+            $and: [titleCondition],
+        };
+
+        // Understand why there is no await in the below statement
+        const skipAmount = (Number(page) - 1) * limit
+        const productsQuery = Product.find(conditions)
+            .sort({ createdAt: 'desc' }) //change in a way because we dont have createdAt field in product model
+            .skip(skipAmount)
+            .limit(limit)
+        // Event.find() method in Mongoose returns a Query object, not a promise. Therefore, you don't need to use await in this specific context. if we want to use await keyword, then we had to add .exec() method at the end, which returns promise.
+
+        // const products = await populateEvent(productsQuery);
+        // We need total no of events received, as from it we can implement pagination.
+        const productsCount = await Product.countDocuments(conditions);
+
+        return {
+            // data: JSON.parse(JSON.stringify(products)),
+            data: JSON.parse(JSON.stringify(productsQuery)),
+            totalPages: Math.ceil(productsCount / limit),
         }
-
-        // Unlink relationships
-        /* await Promise.all([
-            // Update the 'events' collection to remove references to the user
-            Event.updateMany({ _id: { $in: userToDelete.events } }, { $pull: { organizer: userToDelete._id } }),
-           
-            // Update the 'orders' collection to remove references to the user
-            Order.updateMany({ _id: { $in: userToDelete.orders } }, { $unset: { buyer: 1 } }),
-        ]); */
-
-        // Delete user
-        const deletedUser = await User.findByIdAndDelete(userToDelete._id);
-        revalidatePath("/");
-
-        return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
     } catch (error) {
         handleError(error);
     }

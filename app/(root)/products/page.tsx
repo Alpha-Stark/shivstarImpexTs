@@ -1,8 +1,14 @@
 "use client";
 
-import React from "react";
-import { useEffect, useState } from "react";
-import { Box, Flex, Grid, Heading, Image, Button, ButtonGroup, Text, Spinner, Center, useDisclosure, useToast } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+
+interface Product {
+    avatar: string;
+    brand: string;
+    about: string;
+    price: string;
+}
 
 function AllProducts() {
     const [data, setData] = useState([]);
@@ -10,152 +16,220 @@ function AllProducts() {
     const [Loading, setLoading] = useState(false);
     const [Err, setErr] = useState(false);
 
-    const toast = useToast();
-
-
     // fetch data function to fetch data from the mongodb database
-    /* const fetchrender = async () => {
+    const products = [
+        {
+            avatar: "https://gem-garden-jewelry-store.vercel.app/static/media/card5.471f0f73c03a3ce42177.png",
+            brand: "Messika",
+            about: "White Gold Diamond Ring.",
+            price: "$1.390",
+        },
+        {
+            avatar: "https://gem-garden-jewelry-store.vercel.app/static/media/card6.cdfc389c353e0a1a95c5.png",
+            brand: "Tiffani",
+            about: "Silver Necklace.",
+            price: "$750",
+        },
+        {
+            avatar: "https://gem-garden-jewelry-store.vercel.app/static/media/card7.3abfa35a89cf47b097ae.png",
+            brand: "Bulgari",
+            about: "White Gold Diamond Earring.",
+            price: "$7.250",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+        {
+            avatar: "https://mygemma.com/cdn/shop/products/122588-fv_1200x.jpg?v=1659050494",
+            brand: "Cartier",
+            about: "White Gold Ring.",
+            price: "$1.950",
+        },
+    ];
+
+    const fetchrender = async () => {
         setLoading(true);
         try {
-            let res = await fetch(`https://traveller-jt36.onrender.com/jewellery?_page=${page}&_limit=12${(query && "&category=" + query) || "Rings"}`);
-            let data = await res.json();
+            // let res = await fetch(`https://traveller-jt36.onrender.com/jewellery?_page=${page}&_limit=12`);
+            // let result = await res.json();
+
+            let res = axios.get("https://traveller-jt36.onrender.com/jewellery?_page=1&_limit=12");
+            // const result: Product[] = res;
+            setData(res);
+            // setData(products);
             setLoading(false);
-            setData(data);
         } catch (err) {
             setLoading(false);
             setErr(true);
         }
     };
+
     useEffect(() => {
-        fetchrender(page, query);
-    }, [page, query]); */
+        fetchrender();
+    }, [page]);
 
     if (Loading) {
         return (
-            <Center p={"150px"}>
-                <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="black.500" size="xl" />
-            </Center>
+            <div style={{ padding: "150px", textAlign: "center" }}>
+                <div className="spinner"></div>
+                <style jsx>{`
+                    .spinner {
+                        border: 4px solid rgba(0, 0, 0, 0.1);
+                        border-left-color: #000;
+                        border-radius: 50%;
+                        width: 50px;
+                        height: 50px;
+                        animation: spin 1s linear infinite;
+                    }
+                    @keyframes spin {
+                        to {
+                            transform: rotate(360deg);
+                        }
+                    }
+                `}</style>
+            </div>
         );
     }
 
     if (Err) {
-        return toast({
-            title: `Try Again`,
-            status: "error",
-            isClosable: true,
-        });
+        return (
+            <div>
+                <p style={{ color: "red" }}>An error occurred. Please try again.</p>
+            </div>
+        );
     }
 
-    const handclick = (val: number) => {
+    const handleClick = (val: any) => {
         setPage(page + val);
     };
+    const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div style={{ paddingTop: "70px", paddingBottom: "70px" }}>
-            <Grid
-                textAlign={"left"}
-                color={"#171616"}
-                w="90%"
-                m="auto"
-                gap={{ base: "2%", md: "3%", xl: "4%" }}
-                // pt={"70px"}
-                justifyContent={"center"}
-                templateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(3,1fr)", xl: "repeat(4,1fr)" }}
-
+        <div style={{ paddingTop: "115px", paddingBottom: "0px" }}>
+            <div
+                style={{
+                    textAlign: "left",
+                    color: "#171616",
+                    width: "90%",
+                    margin: "auto",
+                    display: "grid",
+                    gap: "2%",
+                    justifyContent: "center",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                }}
             >
-                {data.map((ele, i) => (
-                    // <Box
-                    //   textAlign="center"
-                    //   boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
-                    //   _hover={{
-                    //     transform: "scale(1.05)",
-                    //     transition: "transform 0.4s",
-                    //     border: "1px double black",
-                    //   }}
-                    // >
-                    //   <Image src={ele.avatar} w="250px" />
-                    //   <Heading m="10px" as="h6" size={"sm"} color="green">
-                    //     {ele.about}
-                    //   </Heading>
-                    //   <Heading m="10px" as="h6" size={"sm"}>
-                    //     {ele.brand}
-                    //   </Heading>
-                    //   <Heading m="10px" as="h6" size={"sm"} color="gold">
-                    //     ₹ {ele.price}
-                    //   </Heading>
-                    //   <ButtonGroup variant="outline" spacing="45" mb="18px">
-                    //     <Button bg="blue" color="white" borderRadius="8px" p="2px">
-                    //       ADD CARD
-                    //     </Button>
-                    //     <Button bg="red" color="white" borderRadius="8px" p="2px">
-                    //       Read More
-                    //     </Button>
-                    //   </ButtonGroup>
-                    // </Box>
-                    <Box boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px" display={"flex"} p={"10px"} flexDir={"column"} _hover={{ transform: "scale(1.02)", transition: "transform 0.4s" }} h={"320px"} key={i}>
-                        {/* <Image src={ele.avatar} w="200px" m={"auto"} alt="Item" /> */}
-                        <Flex justifyContent={"space-around"} alignItems={"center"}>
-                            <Flex direction="column" gap="2%">
-                                {/* <Heading as="h6" size={"sm"} textAlign="left">
-                                    {ele.brand}
-                                </Heading>
-                                <Text fontSize={"14px"} maxW={"130px"} textOverflow={"ellipsis"} overflow={"hidden"}>
-                                    {ele.about}
-                                </Text>
-                                <Text fontSize={"14px"} color="gray">
-                                    {" "}
-                                    ₹{ele.price}
-                                </Text> */}
-                            </Flex>
-                            <Flex direction="column" justifyContent={"space-around"} alignItems={"center"} gap="10px">
-                                <Button variant="link" color={"black"} fontSize={"15px"}>
-                                    More Detail
-                                </Button>
-                                {/* <Button
-                                    color="white"
-                                    bg="black"
-                                    w={"60px"}
-                                    _hover={{ color: "black", bg: "gray.100" }}
-                                    fontSize={"15px"}
-                                    p={"0"}
-                                    onClick={() => {
-                                        isAuth ? (
-                                            <>
-                                                {" "}
-                                                {dispatch({ type: ADD_CART, payload: ele })}{" "}
-                                                {toast({
-                                                    title: `Item Added to Cart`,
-                                                    status: "success",
-                                                    duration: 700,
-                                                    isClosable: true,
-                                                    backgroundColor: "black",
-                                                })}
-                                            </>
-                                        ) : (
-                                            toast({
-                                                title: `Login First`,
-                                                status: "error",
-                                                duration: 700,
-                                                isClosable: true,
-                                                backgroundColor: "black",
-                                            })
-                                        );
-                                    }}
-                                >
-                                    ADD
-                                </Button> */}
-                            </Flex>
-                        </Flex>
-                    </Box>
+                {products.map((ele, i) => (
+                    <div
+                        key={i}
+                        style={{
+                            boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                            display: "flex",
+                            flexDirection: "column",
+                            padding: "10px",
+                            height: "320px",
+                            transition: "transform 0.4s",
+                            cursor: "pointer",
+                            transform: isHovered ? "scale(1.02)" : "none",
+                        }}
+                    >
+                        <img src={ele.avatar} style={{ width: "200px", margin: "auto" }} alt="Item" />
+                        <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                            <div style={{ display: "flex", flexDirection: "column", gap: "2%" }}>
+                                <h6 style={{ textAlign: "left" }}>{ele.brand}</h6>
+                                <p style={{ fontSize: "14px", maxWidth: "130px", textOverflow: "ellipsis", overflow: "hidden" }}>{ele.about}</p>
+                                <p style={{ fontSize: "14px", color: "gray" }}>{ele.price}</p>
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-around", alignItems: "center", gap: "10px" }}>
+                                <button style={{ color: "black", fontSize: "15px", background: "none", border: "none", cursor: "pointer" }}>More Detail</button>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-            </Grid>
-            <ButtonGroup variant="outline" spacing="7" mt="12%">
-                <Button onClick={() => handclick(-1)} isDisabled={page === 1}>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "12%" }}>
+                <button onClick={() => handleClick(-1)} disabled={page === 1} style={{ padding: "10px", marginRight: "10px" }}>
                     Previous
-                </Button>
+                </button>
                 <p>{page}</p>
-                <Button onClick={() => handclick(1)}>Next</Button>
-            </ButtonGroup>
+                <button onClick={() => handleClick(1)} style={{ padding: "10px", marginLeft: "10px" }}>
+                    Next
+                </button>
+            </div>
         </div>
     );
 }

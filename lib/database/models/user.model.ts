@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     photo: { type: String, required: true },
-    // userType: { type: String, required: true, default: "user" },
+    userType: { type: String, required: true, default: "user" },
 });
 
 const User = models.User || model("User", UserSchema);
