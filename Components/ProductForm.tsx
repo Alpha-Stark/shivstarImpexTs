@@ -97,7 +97,7 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
         if (type === "Create") {
             try {
                 const newProduct = await createProduct({
-                    ...values, photo: uploadedImageUrl
+                    ...values, photo: uploadedImageUrl,
                 });
                 /* const newProduct = await createProduct({
                     product: { ...values, photo: uploadedImageUrl }
