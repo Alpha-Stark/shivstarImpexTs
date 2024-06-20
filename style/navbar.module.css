@@ -12,14 +12,14 @@
   z-index: 10;
 }
 
-.navbar-link {
+.navbaronly .navbar-link {
   color: white;
   text-decoration: none;
   font-size: 1rem;
   margin: 0.5rem;
 }
 
-.navbar-link:hover {
+.navbaronly .navbar-link:hover{
   text-decoration: underline;
 }
 
