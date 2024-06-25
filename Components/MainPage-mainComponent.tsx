@@ -1,26 +1,23 @@
 import React from "react";
 import styles from "../style/mainPage.module.css";
-import { Box, Flex, HStack, Heading, Image, Spacer, Text, VStack } from "@chakra-ui/react";
+
 export const MainPagemainComponent = () => {
     return (
-        <Flex className={styles.stopmostcontainer} alignItems={"end"} w={{ base: "140%", md: "100%" }} pt={{ base: "200px", md: "40px" }} flexDirection={{ base: "column", md: "row" }}>
-            <HStack w="30%" h="90%" marginLeft="10%">
-                <VStack alignItems="start">
-                    <Heading as="h2" textAlign="left" m="1" color="white" style={{ fontSize: "4xl" }}>
+        <div className={styles.stopmostcontainer}>
+            <div className={styles.hstack}>
+                <div className={styles.vstack}>
+                    <h2 className={styles.heading}>
                         Your Diamond Search Starts Here
-                    </Heading>
-                    <Text textAlign="left" fontSize="lg" color="white">
+                    </h2>
+                    <p className={styles.text}>
                         Discover the perfect diamond pieces for your unique style at our store
-                    </Text>
-                    <br />
-                    <br />
-                    <Text textAlign="left" color="white">
+                    </p>
+                    <p className={styles.text2}>
                         DISCOVER
-                    </Text>
-                    <Spacer />
-                    <Box w="60%" className={styles.mainhands}></Box>
-                </VStack>
-            </HStack>
-        </Flex>
+                    </p>
+                </div>
+            </div>
+            <div className={styles.mainhands}></div>
+        </div>
     );
 };
