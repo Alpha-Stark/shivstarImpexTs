@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './Card';
 // import Pagination from './Pagination';
+import styles from "@/style/Collection.module.css"
 
 type Product = {
     _id: string,
@@ -35,8 +36,8 @@ const Collection = ({ data, isOwner }: { data: Product[], isOwner: boolean }) =>
     return (
         <>
             {data.length > 0 ? (
-                <div className='flex flex-col items-center gap-10'>
-                    <ul className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 xl:gap-10">
+                <div className={styles.collectionContainer}>
+                    <ul className={styles.productGrid}>
                         {data.map((product) => (
                             <li key={product._id} className='flex justify-center'>
                                 <Card product={product} isOwner={isOwner} />
@@ -45,9 +46,9 @@ const Collection = ({ data, isOwner }: { data: Product[], isOwner: boolean }) =>
                     </ul>
                 </div>
             ) : (
-                <div className='flex-center wrapper min-h-[200px] w-full flex-col gap-3 rounded-[14px] bg-grey-50 py-28 text-center'>
-                    <h3 className='p-bold-20 md:h5-bold'>{emptyTitle}</h3>
-                    <p className='p-regular-14'>{emptyStateSubtext}</p>
+                <div className={styles.emptyState}>
+                    <h3 className={styles.emptyTitle}>{emptyTitle}</h3>
+                    <p className={styles.emptySubtext}>{emptyStateSubtext}</p>
                 </div>
             )}
         </>
