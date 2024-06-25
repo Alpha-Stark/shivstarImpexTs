@@ -168,9 +168,10 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
-                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
-                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
-                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="I1">I1</SelectItem>
+                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS">VVS</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
+                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VS">VS</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
+                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="SI3">SI3</SelectItem>
+                                                    <SelectItem value="I1">I1</SelectItem>
                                                     <SelectItem value="I2">I2</SelectItem><SelectItem value="I3">I3</SelectItem>
                                                 </SelectGroup>
                                             </SelectContent>
@@ -197,9 +198,10 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectGroup>
-                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
-                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
-                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="I1">I1</SelectItem>
+                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS">VVS</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
+                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VVS">VVS</SelectItem><SelectItem value="VS">VS</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
+                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="SI3">SI3</SelectItem>
+                                                    <SelectItem value="I1">I1</SelectItem>
                                                     <SelectItem value="I2">I2</SelectItem><SelectItem value="I3">I3</SelectItem>
                                                 </SelectGroup>
                                             </SelectContent>
