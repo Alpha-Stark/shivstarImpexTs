@@ -1,10 +1,11 @@
 import { revalidatePath } from "next/cache";
 
-import User from "@/lib/database/models/user.model";
+
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database";
 import { CreateUserParams, UpdateUserParams } from "@/types";
-// import User from "../database/models/user.model";
+import User from "../database/models/userModel";
+
 
 export async function createUser(user: CreateUserParams) {
     //** refer docs on serverless function (https://vercel.com/docs/functions/serverless-functions)
@@ -15,6 +16,19 @@ export async function createUser(user: CreateUserParams) {
         return JSON.parse(JSON.stringify(newUser)); //we do this to return a general Javascript object of the user and not the mongodb document.
     } catch (error) {
         handleError(error);
+    }
+}
+
+export async function getUserByClerkId(clerkId: string) {
+    try {
+        await connectToDatabase();
+
+        const user = await User.findOne({ clerkId });
+
+        if (!user) throw new Error("User not found");
+        return JSON.parse(JSON.stringify(user));
+    } catch (error) {
+        handleError(`Errorr: ${error}`);
     }
 }
 

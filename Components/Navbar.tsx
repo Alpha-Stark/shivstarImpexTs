@@ -16,7 +16,7 @@ function Navbar() {
                 </Link>
             </div>
             <div className={styles.navbarlinks}>
-                <Link href="/diamonds" className={`${styles["navbar-link"]} my-1 md:my-0 mx-2 md:mx-4 p-1`}>
+                <Link href="/products" className={`${styles["navbar-link"]} my-1 md:my-0 mx-2 md:mx-4 p-1`}>
                     Diamonds
                 </Link>
                 <Link href="/watches" className={`${styles["navbar-link"]} my-1 md:my-0 mx-2 md:mx-4 p-1`}>

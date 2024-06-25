@@ -11,11 +11,15 @@ let cached = (global as any).mongoose || { conn: null, promise: null };
    This cached variable in intent to hold a cached connection to our database.
 */
 
+
+
 export const connectToDatabase = async () => {
+
     // connect with database
+    if (!MONGODB_URI) throw new Error("MONGODB_URI is missing");
     if (cached.conn) return cached.conn;
 
-    if (!MONGODB_URI) throw new Error("MONGODB_URI is missing");
+
 
     cached.promise =
         cached.promise ||

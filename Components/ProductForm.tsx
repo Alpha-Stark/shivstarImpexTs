@@ -31,14 +31,13 @@ type productFromProps = {
         name: string,
         description: string,
         price: string,
-        stock: string,
         photo: string,
         colorFrom: string,
         colorTo: string,
         clarityFrom: string,
         clarityTo: string,
         cut: string,
-        carat: string,
+        fluorescence: string,
         shape: string,
         certificate: string,
     }
@@ -56,14 +55,13 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
                 name: "",
                 description: "",
                 price: "", //price: 0 , to remove error below
-                stock: "", //stock: 0
                 photo: "",
+                fluorescence: "",
                 colorFrom: "",
                 colorTo: "",
                 clarityFrom: "",
                 clarityTo: "",
                 cut: "",
-                carat: "", //carat: 0
                 shape: "",
                 certificate: "None",
             }
@@ -156,6 +154,63 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
                 </div>
                 <div className="flex flex-col gap-5 md:flex-row">
                     <div className="w-full">
+                        <FormLabel className="text-base">Clarity from</FormLabel>
+                        <FormField
+                            control={form.control}
+                            name="clarityFrom"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormControl>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            {/* <SelectTrigger className="w-[200px]"> */}
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Select Clarity" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
+                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
+                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="I1">I1</SelectItem>
+                                                    <SelectItem value="I2">I2</SelectItem><SelectItem value="I3">I3</SelectItem>
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+
+                    <div className="w-full">
+                        <FormLabel className="text-base">Clarity to</FormLabel>
+                        <FormField
+                            control={form.control}
+                            name="clarityTo"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormControl>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            {/* <SelectTrigger className="w-[200px]"> */}
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Select Clarity" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
+                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
+                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="I1">I1</SelectItem>
+                                                    <SelectItem value="I2">I2</SelectItem><SelectItem value="I3">I3</SelectItem>
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                    <div className="w-full">
                         <FormLabel className="text-base">Color from</FormLabel>
                         <FormField
                             control={form.control}
@@ -216,82 +271,36 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
                         {/* There is something wrong in the above code, lets write the correct one which actually takes value as input */}
                     </div>
 
-                    <div className="w-full">
-                        <FormLabel className="text-base">Clarity from</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="clarityFrom"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Clarity" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
-                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
-                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="I1">I1</SelectItem>
-                                                    <SelectItem value="I2">I2</SelectItem><SelectItem value="I3">I3</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-
-                    <div className="w-full">
-                        <FormLabel className="text-base">Clarity to</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="clarityTo"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Clarity" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
-                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
-                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="I1">I1</SelectItem>
-                                                    <SelectItem value="I2">I2</SelectItem><SelectItem value="I3">I3</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
                 </div>
 
                 <div className="flex flex-col gap-5 md:flex-row">
                     <div className="w-full">
-                        <FormLabel className="text-base">Carat</FormLabel>
+                        <FormLabel className="text-base">Fluorescence</FormLabel>
                         <FormField
                             control={form.control}
-                            name="carat"
+                            name="fluorescence"
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormControl>
-                                        <Input placeholder="Carats" {...field} className="input-field" />
+                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            {/* <SelectTrigger className="w-[200px]"> */}
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Select Fluorescence" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectLabel>Fluorescence</SelectLabel><SelectItem value="None">None</SelectItem>
+                                                    <SelectItem value="Faint">Faint</SelectItem><SelectItem value="Medium">Medium</SelectItem>
+                                                    <SelectItem value="Strong">Strong</SelectItem><SelectItem value="Very Strong">Very Strong</SelectItem>
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
                     </div>
-
                     <div className="w-full">
                         <FormLabel className="text-base">Cut</FormLabel>
                         <FormField
@@ -386,21 +395,6 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
                                 <FormItem className="w-full">
                                     <FormControl>
                                         <Input placeholder="Price" {...field} className="input-field" />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-                    <div className="w-full">
-                        <FormLabel className="text-base">Stock</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="stock"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Input placeholder="Stock" {...field} className="input-field" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

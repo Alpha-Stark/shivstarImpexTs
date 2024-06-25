@@ -2,7 +2,6 @@
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database";
 import { revalidatePath } from "next/cache";
-import User from "@/lib/database/models/user.model";
 import Product from "@/lib/database/models/product.model";
 
 type productPropSchema = {
@@ -10,14 +9,13 @@ type productPropSchema = {
     name: string;
     description: string;
     price: string;
-    stock: string;
     photo: string;
     colorFrom: string;
     colorTo: string;
     clarityFrom: string;
     clarityTo: string;
     cut: string;
-    carat: string;
+    fluorescence: string;
     shape: string;
     certificate: string;
 };
@@ -96,13 +94,25 @@ export async function deleteProduct({ productId, path }: DeleteProductParams) {
     }
 } */
 
+export async function getAllProducts() {
+    try {
+        await connectToDatabase();
+        const products = await Product.find();
+
+        return JSON.parse(JSON.stringify(products));
+    } catch (error) {
+        handleError(error);
+    }
+}
+
 type GetAllProductsParams = {
     query: string
     limit: number
     page: number
 }
 
-export async function getAllProducts({ query, limit = 6, page }: GetAllProductsParams) {
+
+export async function getAllProductsPag({ query, limit = 6, page }: GetAllProductsParams) {
     try {
         await connectToDatabase()
 
