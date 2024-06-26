@@ -1,21 +1,7 @@
-import { Box, Button, Flex, Grid, Heading, Image, Text, transition } from "@chakra-ui/react";
 import React from "react";
-import img1 from "../Pics/messika-cr_oles-move-uno-diamant-or-blanc.jpg";
-import img2 from "../Pics/messika-collier-move-uno-gm-diamant-or-blanc-bis.jpg";
-import img3 from "../Pics/messika-bracelet-diamant-or-blanc-so-move-xl-pave-12942.jpg";
-import img4 from "../Pics/bague-diamant-blanc-titane-graphite-move-titanium-pm-07164_1.jpg";
-// import { useNavigate } from "react-router-dom";
-/* import { useRouter } from "next/router"; */
 import styles from "../style/Newcollection.module.css";
 
 export const NewCollection = () => {
-    // const navigate = useNavigate();
-
-    /* const router = useRouter();
-
-    const handleNavigate = () => {
-        router.push("/products");
-    }; */
     const products = [
         {
             imgSrc: "https://gem-garden-jewelry-store.vercel.app/static/media/card5.471f0f73c03a3ce42177.png",
@@ -47,10 +33,12 @@ export const NewCollection = () => {
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className={styles.headerText}>
-                        <h1>Bestsellers</h1>
+                        <h1>New Collection</h1>
                         <p>Top-rated jewellery from our collection</p>
                     </div>
-                    <div className={styles.viewAllButton}>{/* <button onClick={() => navigate("/products")}>VIEW ALL</button> */}</div>
+                    <div className={styles.viewAllButton}>
+                        {/* <button onClick={() => navigate("/products")}>VIEW ALL</button> */}
+                    </div>
                 </div>
 
                 <div className={styles.grid}>
@@ -67,3 +55,5 @@ export const NewCollection = () => {
         </>
     );
 };
+
+export default NewCollection;

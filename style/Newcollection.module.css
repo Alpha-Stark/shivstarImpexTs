@@ -1,9 +1,12 @@
+/* Ensure the container is centered */
 .container {
-    margin: 30px;
     width: 90%;
-    margin: 3rem;
+    margin: auto;
+    padding: 30px 0;
+    margin-top: 20px;
 }
 
+/* Style the header section */
 .header {
     display: flex;
     justify-content: space-between;
@@ -11,6 +14,7 @@
     margin-bottom: 20px;
 }
 
+/* Style the header text */
 .headerText {
     text-align: left;
     color: #171616;
@@ -28,6 +32,7 @@
     font-size: 16px;
 }
 
+/* Style the view all button */
 .viewAllButton button {
     background: none;
     border: none;
@@ -37,18 +42,24 @@
     text-decoration: underline;
 }
 
+/* Center the grid and its items */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 }
 
+/* Style each card */
 .card {
     background: white;
     border-radius: 5px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     overflow: hidden;
     transition: transform 0.4s;
+    width: calc(100% - 40px); /* Full width minus padding */
+    max-width: 300px; /* Adjust max-width as needed */
+    margin: 0 auto; /* Center the card */
 }
 
 .card:hover {
@@ -77,4 +88,41 @@
 .card .price {
     color: #000;
     font-weight: bold;
+    margin: 10px;
+}
+
+/* Adjust styles for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .headerText h1 {
+        font-size: 1.25em;
+    }
+
+    .headerText p {
+        font-size: 14px;
+    }
+
+    .viewAllButton {
+        margin-top: 10px;
+    }
+
+    .card h3 {
+        font-size: 1em;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
+
+    .card .price {
+        font-size: 1em;
+    }
 }

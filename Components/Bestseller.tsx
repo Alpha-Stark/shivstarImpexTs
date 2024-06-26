@@ -1,5 +1,4 @@
 "use client";
-/* import { useNavigate } from "react-router"; */
 import styles from "../style/Bestseller.module.css";
 
 function Bestseller() {
@@ -35,33 +34,28 @@ function Bestseller() {
     ];
 
     return (
-        <>
-            <div className={styles.container}>
-                <div className={styles.header}>
-                    <div className={styles.headerText}>
-                        <h1>Bestsellers</h1>
-                        <p>Top-rated jewellery from our collection</p>
-                    </div>
-                    <div className={styles.viewAllButton}>
-                        {/* <button onClick={() => navigate("/products")}>VIEW ALL</button> */}
-                        {/* make a nextjs button which will hit a route */}
-                        {/* <Button>View All</Button> */}
-                    </div>
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <div className={styles.headerText}>
+                    <h1>Bestsellers</h1>
+                    <p>Top-rated jewellery from our collection</p>
                 </div>
-
-                <div className={styles.grid}>
-                    {products.map((product) => (
-                        <div key={product.id} className={styles.card}>
-                            <img src={product.imgSrc} alt={product.title} />
-                            <h3>{product.title}</h3>
-                            <p>{product.description}</p>
-                            <p className={styles.price}>{product.price}</p>
-
-                        </div>
-                    ))}
+                <div className={styles.viewAllButton}>
+                    {/* View All button can be added here */}
                 </div>
             </div>
-        </>
+
+            <div className={styles.grid}>
+                {products.map((product) => (
+                    <div key={product.id} className={styles.card}>
+                        <img src={product.imgSrc} alt={product.title} />
+                        <h3>{product.title}</h3>
+                        <p>{product.description}</p>
+                        <p className={styles.price}>{product.price}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }
 
