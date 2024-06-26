@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../style/mainPage.module.css";
+import styles from "@/style/mainPage.module.css"
 
-export const MainPagemainComponent = () => {
+export const MainPageMainComponent = () => {
     return (
         <div className={styles.stopmostcontainer}>
             <div className={styles.hstack}>
