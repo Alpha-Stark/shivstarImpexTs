@@ -1,7 +1,6 @@
-
 /* CSS for gift Section */
 
-.Gift{
+.Gift {
     background: rgb(20,20,20);
     background: linear-gradient(90deg, rgba(20,20,20,1) 0%, rgb(26, 26, 26) 52%, rgb(30, 30, 30) 63%, rgb(33, 33, 33) 72%, rgba(31,31,31,1) 86%);
     display: flex;
@@ -11,50 +10,67 @@
     height: 400px;
     margin-top: 4.5rem;
 }
-.Gift img{
-   width : 500px
+
+.giftImage {
+    width: 500px;
 }
-.giftText{
+
+.giftText {
     width: 500px;
     margin-right: 100px;
     text-align: start;
     box-sizing: border-box;
 }
-/* .giftText p,b,span {
+
+.giftText p,
+.giftText b,
+.giftText span {
     color: rgb(199, 199, 199);
-} */
-.giftText {
-    & p,
-    & b,
-    & span {
-        color: rgb(199, 199, 199);
-    }
 }
+
+.giftText p {
+    font-size: 1rem;
+    margin-top: 20px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+#pjustify {
+    text-align: justify;
+  text-justify: inter-word;
+}
+
 
 /* Media Query for Gift */
 
-@media screen and (max-width: 480px) {
-    .Gift{
-        display: flex;
+@media screen and (max-width: 768px) {
+    .Gift {
         flex-direction: column;
         height: auto;
-        width: 100%;
+        text-align: center;
+        padding: 20px;
     }
 
-    .Gift img{
-        margin-left: -25px;
+    .giftImage {
+        margin-left: 0;
+        width: 100%;
+        max-width: 300px;
     }
-    /* .giftText , p, h1{
-        text-align: center;
+
+    .giftText {
         width: 90%;
-        margin-left: 20px;
-    } */
+        margin: 20px auto;
+    }
+
     .giftText,
     .giftText p,
     .giftText h1 {
         text-align: center;
-        width: 90%;
-        margin-left: 20px;
+        width: 100%;
     }
-    
+
+    #pjustify {
+        text-align: justify;
+      text-justify: inter-word;
+    }
 }

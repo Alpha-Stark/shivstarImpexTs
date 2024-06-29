@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "../style/gift.module.css";
 import gift from "../giftBox.png";
 import { Box, useToast } from "@chakra-ui/react";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, FormControl, Input } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react-use-disclosure";
 import Image from "next/image";
 
@@ -17,9 +17,8 @@ export const Gifts = () => {
     return (
         <>
             <section className={styles.Gift}>
-                <div>
+                <div className={styles.giftImage}>
                     <Image src={gift} alt="Gift Box" />
-                    {/* <img src="../giftBox.png" alt="Gift Box" /> */}
                 </div>
 
                 <div className={styles.giftText}>
@@ -28,7 +27,7 @@ export const Gifts = () => {
                     </h1>
                     <br />
                     <p>Looking for the perfect gift?</p>
-                    <p>Look no further! Our extensive collection of jewelry gifts includes something for everyone - from elegant and timeless pieces for her to bold and sophisticated designs for him</p>
+                    <p id="pjustify">Look no further! Our extensive collection of jewelry gifts includes something for everyone - from elegant and timeless pieces for her to bold and sophisticated designs for him</p>
                     <br />
                     <br />
                     <span>
@@ -64,14 +63,6 @@ export const Gifts = () => {
                             bg="black"
                             _hover={{ color: "black", bg: "gray.100" }}
                             onClick={() =>
-                                // toast({
-                                //   title: 'GIFT SEND SUCCESSFULLY',
-                                //   description: "We've send your gift.",
-                                //   status: 'success',
-                                //   duration: 5000,
-                                //   isClosable: true,
-
-                                // })
                                 toast({
                                     position: "bottom-left",
                                     title: "GIFT SEND SUCCESSFULLY",
