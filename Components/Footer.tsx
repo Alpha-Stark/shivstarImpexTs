@@ -4,6 +4,7 @@ import fbicon from "../Pics/icons8-facebook-48.png";
 import twittericon from "../Pics/icons8-twitter-50.png";
 import instaicon from "../Pics/icons8-instagram-48.png";
 import Image from "next/image";
+
 const Footer = () => {
     return (
         <div className={`${styles.all} block`}>
@@ -13,15 +14,12 @@ const Footer = () => {
                     <div className={`${styles.foot_social_media_Div__djhh7} flex`}>
                         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
                             <Image className={`${styles.imgStyle}`} src={fbicon} alt="Facebook Icon" width={30} height={30} />
-                            {/* <img className={`${styles.imgStyle}`} src={fbicon} style={{ width: "30px" }} alt="Facebook Icon" /> */}
                         </a>
                         <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
                             <Image className={`${styles.imgStyle}`} src={twittericon} alt="Twitter Icon" width={30} height={30} />
-                            {/* <img className={`${styles.imgStyle}`} src={twittericon} style={{ width: "30px" }} alt="Twitter Icon" /> */}
                         </a>
                         <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
                             <Image className={`${styles.imgStyle}`} src={instaicon} alt="Instagram Icon" width={30} height={30} />
-                            {/* <img className={`${styles.imgStyle}`} src={instaicon} style={{ width: "30px" }} alt="Instagram Icon" /> */}
                         </a>
                     </div>
                 </div>
