@@ -1,81 +1,81 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    min-height: 400px;
-    width: 330px;
-    max-width: 350px;
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
-    transition: box-shadow 0.3s ease;
-    overflow: hidden;
-  }
-  
-  .card:hover {
-    box-shadow: 0 12px 28px rgba(149, 157, 165, 0.3);
-  }
-  
-  .cardLink {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--grey-50);
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-    width: 100%;
-  }
-  
-  .cardContent {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 20px;
-    flex-grow: 1;
-  }
-  
-  .cardPrice {
-    font-weight: bold;
-    background-color: var(--green-100);
-    color: var(--green-600);
-    padding: 4px 8px;
-    border-radius: 8px;
-    display: inline-block;
-  }
-  
-  .cardName {
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-  }
-  
-  .cardDescription {
-    font-size: 16px;
-    color: var(--grey-500);
-  }
-  
-  .cardAttributes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    font-size: 14px;
-    color: var(--grey-700);
-  }
-  
-  .cardAttributes p {
-    margin: 0;
-  }
-  
-  .cardActions {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    background-color: white;
-    padding: 8px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  width: 330px;
+  max-width: 350px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
+  transition: box-shadow 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 12px 28px rgba(149, 157, 165, 0.3);
+}
+
+.cardLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--grey-50);
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  width: 100%;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.cardPrice {
+  font-weight: bold;
+  background-color: var(--green-100);
+  color: var(--green-600);
+  padding: 4px 8px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.cardName {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+}
+
+.cardDescription {
+  font-size: 16px;
+  color: var(--grey-500);
+}
+
+.cardAttributes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--grey-700);
+}
+
+.cardAttributes p {
+  margin: 0;
+}
+
+.cardActions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: white;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

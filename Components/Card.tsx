@@ -1,9 +1,11 @@
-import { formatDateTime } from '@/lib/utils'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import { DeleteConfirmation } from './DeleteConfirmation'
-import styles from "@/style/Card.module.css"
+"use client";
+
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import { DeleteConfirmation } from './DeleteConfirmation';
+import styles from "@/style/Card.module.css";
 
 type cardProps = {
     product: {
@@ -22,14 +24,18 @@ type cardProps = {
         certificate: string;
     };
     isOwner: boolean;
-}
+};
 
 const Card = ({ product, isOwner }: cardProps) => {
+    const router = useRouter();
+
+    const handleCardClick = () => {
+        router.push(`/products/${product._id}`);
+    };
 
     return (
-        <div className={styles.card}>
-            <Link
-                href={`/products/${product._id}`}
+        <div className={styles.card} onClick={handleCardClick} role="button">
+            <div
                 style={{ backgroundImage: `url(${product.photo})` }}
                 className={styles.cardLink}
             />
@@ -73,4 +79,4 @@ const Card = ({ product, isOwner }: cardProps) => {
     );
 }
 
-export default Card
+export default Card;

@@ -1,6 +1,8 @@
+"use client";
+
 import React from 'react';
 import Card from './Card';
-import styles from "@/style/Collection.module.css"
+import styles from "@/style/Collection.module.css";
 
 type Product = {
     _id: string,
