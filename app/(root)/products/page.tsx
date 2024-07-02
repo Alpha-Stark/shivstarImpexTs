@@ -4,6 +4,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { SignInButton } from "@clerk/nextjs";
 import { getAllProductsPag } from "@/lib/actions/product.action";
 import Pagination from "@/Components/Pagination";
+import Search from "@/Components/Search";
 
 type Product = {
     _id: string;
@@ -22,14 +23,13 @@ type Product = {
 };
 
 type Props = {
-    searchParams: { page: string };
+    searchParams: { page: string, query: string };
 };
-
 
 async function products({ searchParams }: Props) {
     const page = parseInt(searchParams.page) || 1;
-    // const { data, totalPages } = await getAllProductsPag({ query: '', limit: 8, page });
-    const res = await getAllProductsPag({ query: "", limit: 8, page }) as { data: Product[], totalPages: number };
+    const query = searchParams.query || '';
+    const res = await getAllProductsPag({ query, limit: 8, page }) as { data: Product[], totalPages: number };
     const data = res.data;
     const totalPages = res.totalPages;
 
@@ -38,15 +38,10 @@ async function products({ searchParams }: Props) {
         return <SignInButton />;
     }
     const clerkId = user.id;
-    // console.log(clerkId);
-
-
-    // Function to fetch user type
 
     const fetchUserType = async () => {
         try {
             const userDetails = await getUserByClerkId(clerkId);
-            // console.log(userDetails);
             return userDetails.userType;
         } catch (err) {
             console.error("Failed to fetch user type", err);
@@ -55,9 +50,9 @@ async function products({ searchParams }: Props) {
 
     let userType = await fetchUserType();
 
-
     return (
         <>
+            <Search placeholder="Search products by name..." />
             <AllProducts userType={userType} data={data} />
             <Pagination currentPage={page} totalPages={totalPages} />
         </>

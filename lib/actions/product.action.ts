@@ -126,19 +126,25 @@ type GetAllProductsParams = {
     page: number
 }
 
-export async function getAllProductsPag({ query, limit = 6, page }: GetAllProductsParams) {
+export async function getAllProductsPag({ query, limit = 8, page }: GetAllProductsParams) {
     try {
         await connectToDatabase();
-        const titleCondition = query ? { title: { $regex: `.*${query}.*`, $options: 'i' } } : {};
-        const conditions = { $and: [titleCondition] };
+
+        const nameCondition = query ? { name: { $regex: query, $options: 'i' } } : {};
+        const conditions = {
+            $and: [nameCondition],
+        };
+
         const skipAmount = (Number(page) - 1) * limit;
         const productsQuery = Product.find(conditions)
             .sort({ createdAt: 'desc' })
             .skip(skipAmount)
             .limit(limit)
-            .exec();
+            .exec(); // Added exec to return a promise
+
         const productsCount = await Product.countDocuments(conditions);
         const products = await productsQuery;
+
         return {
             data: JSON.parse(JSON.stringify(products)),
             totalPages: Math.ceil(productsCount / limit),
@@ -147,6 +153,8 @@ export async function getAllProductsPag({ query, limit = 6, page }: GetAllProduc
         handleError(error);
     }
 }
+
+
 
 
 
