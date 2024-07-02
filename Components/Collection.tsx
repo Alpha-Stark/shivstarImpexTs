@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from './Card';
-// import Pagination from './Pagination';
 import styles from "@/style/Collection.module.css"
 
 type Product = {
@@ -18,17 +17,6 @@ type Product = {
     shape: string,
     certificate: string,
 }
-
-
-/* type CollectionProps = {
-    data: Product[],
-    emptyTitle: string,
-    emptyStateSubtext: string,
-    limit: number,
-    page: number | string,
-    totalPages?: number,
-    urlParamName?: string
-} */
 
 const Collection = ({ data, isOwner }: { data: Product[], isOwner: boolean }) => {
     const emptyTitle = "No Products Available";
@@ -54,6 +42,5 @@ const Collection = ({ data, isOwner }: { data: Product[], isOwner: boolean }) =>
         </>
     );
 }
-
 
 export default Collection;
