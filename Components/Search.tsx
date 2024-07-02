@@ -1,10 +1,9 @@
 "use client";
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Input } from './ui/input';
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
-import styles from "../style/Search.module.css";
+import styles from '@/style/Search.module.css';
 
 const Search = ({ placeholder = 'Search products by name...' }: { placeholder?: string }) => {
     const [query, setQuery] = useState('');
@@ -36,7 +35,7 @@ const Search = ({ placeholder = 'Search products by name...' }: { placeholder?: 
     return (
         <div className={styles.searchContainer}>
             <Image src="/assets/icons/search.svg" alt="search" width={24} height={24} className={styles.searchIcon} />
-            <Input
+            <input
                 type="text"
                 placeholder={placeholder}
                 onChange={(e) => setQuery(e.target.value)}

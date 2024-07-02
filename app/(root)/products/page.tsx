@@ -5,6 +5,7 @@ import { SignInButton } from "@clerk/nextjs";
 import { getAllProductsPag } from "@/lib/actions/product.action";
 import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
+import styles from "@/style/productRoutePage.module.css";
 
 type Product = {
     _id: string;
@@ -52,7 +53,10 @@ async function products({ searchParams }: Props) {
 
     return (
         <>
-            <Search placeholder="Search products by name..." />
+            <div className={styles.heading}>
+                <h1>Product Catalog</h1>
+                <Search placeholder="Search products by name..." />
+            </div>
             <AllProducts userType={userType} data={data} />
             <Pagination currentPage={page} totalPages={totalPages} />
         </>

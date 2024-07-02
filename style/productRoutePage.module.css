@@ -1,0 +1,52 @@
+.heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-bottom: 20px; */
+  }
+  
+  .heading h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 3.5rem;
+    /* margin-bottom: 10px; */
+    color: #333;
+    font-family: 'Roboto', sans-serif; /* Make sure to include the font family you want */
+  }
+  
+  /* Import a Google font */
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+  
+  /* Additional styling for the search box */
+  .searchBox {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  .searchBox img {
+    margin-right: 10px;
+  }
+  
+  .searchBox input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 25px;
+    background-color: #f9f9f9;
+  }
+  
+
+@media screen and (max-width: 768px) {
+    .heading {
+        margin: 0 20px;
+    }
+}
