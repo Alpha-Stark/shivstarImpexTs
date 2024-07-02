@@ -94,6 +94,21 @@ export async function deleteProduct({ productId, path }: DeleteProductParams) {
     }
 } */
 
+/* export async function getAllProducts(query = '') {
+    try {
+        await connectToDatabase();
+        const products = await Product.find({
+            name: { $regex: query, $options: 'i' } // Case-insensitive search by name
+        }).exec();
+
+        return JSON.parse(JSON.stringify(products));
+    }
+    catch (error) {
+        handleError(error);
+    }
+} */
+
+
 export async function getAllProducts() {
     try {
         await connectToDatabase();
@@ -111,16 +126,34 @@ type GetAllProductsParams = {
     page: number
 }
 
-
 export async function getAllProductsPag({ query, limit = 6, page }: GetAllProductsParams) {
+    try {
+        await connectToDatabase();
+        const titleCondition = query ? { title: { $regex: `.*${query}.*`, $options: 'i' } } : {};
+        const conditions = { $and: [titleCondition] };
+        const skipAmount = (Number(page) - 1) * limit;
+        const productsQuery = Product.find(conditions)
+            .sort({ createdAt: 'desc' })
+            .skip(skipAmount)
+            .limit(limit)
+            .exec();
+        const productsCount = await Product.countDocuments(conditions);
+        const products = await productsQuery;
+        return {
+            data: JSON.parse(JSON.stringify(products)),
+            totalPages: Math.ceil(productsCount / limit),
+        };
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+
+
+/* export async function getAllProductsPag({ query, limit = 6, page }: GetAllProductsParams) {
     try {
         await connectToDatabase()
 
-        /* const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {}
-        const categoryCondition = category ? await getCategoryByName(category) : null
-        const conditions = {
-            $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
-        } */
         const titleCondition = query ? { title: { $regex: `.*${query}.*`, $options: 'i' } } : {};
         const conditions = {
             $and: [titleCondition],
@@ -146,4 +179,4 @@ export async function getAllProductsPag({ query, limit = 6, page }: GetAllProduc
     } catch (error) {
         handleError(error);
     }
-}
+} */

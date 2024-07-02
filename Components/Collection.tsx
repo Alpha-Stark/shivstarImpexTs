@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import Card from './Card';
 import styles from "@/style/Collection.module.css";
 
@@ -23,13 +22,14 @@ type Product = {
 const Collection = ({ data, isOwner }: { data: Product[], isOwner: boolean }) => {
     const emptyTitle = "No Products Available";
     const emptyStateSubtext = "Please check back later for new products.";
+
     return (
         <>
             {data.length > 0 ? (
                 <div className={styles.collectionContainer}>
                     <ul className={styles.productGrid}>
                         {data.map((product) => (
-                            <li key={product._id} className='flex justify-center'>
+                            <li key={product._id} className={styles.productItem}>
                                 <Card product={product} isOwner={isOwner} />
                             </li>
                         ))}

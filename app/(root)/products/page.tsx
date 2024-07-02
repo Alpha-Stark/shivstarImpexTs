@@ -2,16 +2,36 @@ import { getUserByClerkId } from "@/lib/actions/user.action";
 import AllProducts from "@/Components/AllProducts";
 import { currentUser } from "@clerk/nextjs/server";
 import { SignInButton } from "@clerk/nextjs";
+import { getAllProductsPag } from "@/lib/actions/product.action";
+import Pagination from "@/Components/Pagination";
 
-interface Product {
-    avatar: string;
-    brand: string;
-    about: string;
-    price: string;
-}
+type Product = {
+    _id: string;
+    name: string;
+    description: string;
+    price: number;
+    photo: string;
+    colorFrom: string;
+    colorTo: string;
+    clarityFrom: string;
+    clarityTo: string;
+    cut: string;
+    fluorescence: string;
+    shape: string;
+    certificate: string;
+};
+
+type Props = {
+    searchParams: { page: string };
+};
 
 
-async function products() {
+async function products({ searchParams }: Props) {
+    const page = parseInt(searchParams.page) || 1;
+    // const { data, totalPages } = await getAllProductsPag({ query: '', limit: 8, page });
+    const res = await getAllProductsPag({ query: "", limit: 8, page }) as { data: Product[], totalPages: number };
+    const data = res.data;
+    const totalPages = res.totalPages;
 
     const user = await currentUser();
     if (!user) {
@@ -37,7 +57,10 @@ async function products() {
 
 
     return (
-        <AllProducts userType={userType} />
+        <>
+            <AllProducts userType={userType} data={data} />
+            <Pagination currentPage={page} totalPages={totalPages} />
+        </>
     );
 }
 

@@ -2,14 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 20px; /* Increased gap for better spacing */
+  padding: 20px; /* Added padding to the container */
 }
 
 .productGrid {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  max-width: 1200px; /* Added max-width to limit the container width */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px; /* Increased gap between grid items */
+  padding: 0 20px; /* Added horizontal padding to the grid */
+  justify-content: center; /* Center the grid items */
+}
+
+.productItem {
+  display: flex;
+  justify-content: center;
 }
 
 .emptyState {
@@ -35,8 +44,20 @@
   font-size: 14px;
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 1024px) {
   .productGrid {
-      grid-template-columns: repeat(1, 1fr); /* Make it a single column on small screens */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .productGrid {
+    grid-template-columns: 1fr;
   }
 }
