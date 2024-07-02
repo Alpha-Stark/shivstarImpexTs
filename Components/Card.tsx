@@ -53,7 +53,7 @@ const Card = ({ product, isOwner }: cardProps) => {
                 </div>
             )}
             <div className={styles.cardContent}>
-                <div className="flex gap-2">
+                <div className={styles.priceContainer}>
                     <span className={styles.cardPrice}>
                         ${product.price}
                     </span>

@@ -10,6 +10,7 @@
   transition: box-shadow 0.3s ease;
   overflow: hidden;
   cursor: pointer;
+  position: relative; /* Added this to position cardActions properly */
 }
 
 .card:hover {
@@ -35,11 +36,19 @@
   flex-grow: 1;
 }
 
+.priceContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
 .cardPrice {
   font-weight: bold;
   background-color: var(--green-100);
   color: var(--green-600);
-  padding: 4px 8px;
+  /* padding: 4px 8px; */
+  padding: 4px 0px;
   border-radius: 8px;
   display: inline-block;
 }
