@@ -2,10 +2,11 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin: 20px;
+    margin-top: 20px;
 }
 
-.pagination button {
+.pagination button,
+.pagination .ellipsis {
     padding: 10px 15px;
     border: 1px solid #d1d1d1;
     border-radius: 5px;
@@ -24,4 +25,10 @@
 .pagination button:hover {
     background-color: #e0e0e0;
     border: 1px solid #c0c0c0;
+}
+
+.pagination .ellipsis {
+    pointer-events: none;
+    background-color: transparent;
+    border: none;
 }
