@@ -17,9 +17,11 @@
 
 .pagination button.active {
     font-weight: bold;
-    background-color: #0070f3;
+    /* background-color: #0070f3; */
+    background-color: rgb(40, 212, 168);
     color: white;
-    border: 1px solid #0070f3;
+    /* border: 1px solid #0070f3; */
+    border: 1px solid rgb(40, 212, 168);
 }
 
 .pagination button:hover {
