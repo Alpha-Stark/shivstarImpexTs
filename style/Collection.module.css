@@ -10,7 +10,7 @@
   display: grid;
   width: 100%;
   max-width: 1200px; /* Added max-width to limit the container width */
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 0fr);
   gap: 20px; /* Increased gap between grid items */
   padding: 0 20px; /* Added horizontal padding to the grid */
   justify-content: center; /* Center the grid items */
