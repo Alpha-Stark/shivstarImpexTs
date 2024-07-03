@@ -25,10 +25,10 @@ function Navbar() {
                 <Link href="/products" className={styles["navbar-link"]}>
                     Diamonds
                 </Link>
-                <Link href="/watches" className={styles["navbar-link"]}>
-                    Watches
+                <Link href="/jewellery" className={styles["navbar-link"]}>
+                    Jewellery
                 </Link>
-                <Link href="/gift" className={styles["navbar-link"]}>
+                {/* <Link href="/gift" className={styles["navbar-link"]}>
                     Gift
                 </Link>
                 <Link href="/contactUs" className={styles["navbar-link"]}>
@@ -39,7 +39,7 @@ function Navbar() {
                 </Link>
                 <Link href="/bag" className={styles["navbar-link"]}>
                     Bag
-                </Link>
+                </Link> */}
             </div>
             <div className={styles.navbarbuttons}>
                 <SignedOut>
