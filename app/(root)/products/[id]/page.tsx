@@ -87,7 +87,7 @@ const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps
 
                         <div className="flex flex-wrap gap-4 items-center">
                             <p className='text-2xl font-semibold bg-green-100 px-5 py-2 text-green-700 rounded'>
-                                {`₹${product.price}`}
+                                {`$${product.price}`}
                             </p>
                         </div>
                     </div>
