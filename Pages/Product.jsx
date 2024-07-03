@@ -105,7 +105,7 @@ function Product({ query }) {
                                 </Text>
                                 <Text fontSize={"14px"} color="gray">
                                     {" "}
-                                    ₹{ele.price}
+                                    ${ele.price}
                                 </Text>
                             </Flex>
                             <Flex direction="column" justifyContent={"space-around"} alignItems={"center"} gap="10px">
