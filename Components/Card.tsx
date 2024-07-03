@@ -34,14 +34,16 @@ const Card = ({ product, isOwner }: cardProps) => {
     };
 
     return (
-        <div className={styles.card} onClick={handleCardClick} role="button">
+        <div className={styles.card}>
             <div
                 style={{ backgroundImage: `url(${product.photo})` }}
                 className={styles.cardLink}
+                onClick={handleCardClick}
+                role="button"
             />
             {isOwner && (
                 <div className={styles.cardActions}>
-                    <Link href={`/products/${product._id}/update`}>
+                    <Link href={`/products/${product._id}/update`} onClick={(e) => e.stopPropagation()}>
                         <Image
                             src="/assets/icons/edit.svg"
                             alt='edit'
@@ -49,10 +51,12 @@ const Card = ({ product, isOwner }: cardProps) => {
                             height={20}
                         />
                     </Link>
-                    <DeleteConfirmation productId={product._id} />
+                    <div onClick={(e) => e.stopPropagation()}>
+                        <DeleteConfirmation productId={product._id} />
+                    </div>
                 </div>
             )}
-            <div className={styles.cardContent}>
+            <div className={styles.cardContent} onClick={handleCardClick} role="button">
                 <div className={styles.priceContainer}>
                     <span className={styles.cardPrice}>
                         ${product.price}

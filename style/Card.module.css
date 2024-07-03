@@ -9,8 +9,7 @@
   box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
   transition: box-shadow 0.3s ease;
   overflow: hidden;
-  cursor: pointer;
-  position: relative; /* Added this to position cardActions properly */
+  position: relative; /* Add this to position cardActions correctly */
 }
 
 .card:hover {
@@ -26,6 +25,7 @@
   background-position: center;
   height: 200px;
   width: 100%;
+  cursor: pointer;
 }
 
 .cardContent {
@@ -38,17 +38,14 @@
 
 .priceContainer {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
+  justify-content: space-between;
 }
 
 .cardPrice {
   font-weight: bold;
   background-color: var(--green-100);
   color: var(--green-600);
-  /* padding: 4px 8px; */
-  padding: 4px 0px;
+  padding: 4px 8px;
   border-radius: 8px;
   display: inline-block;
 }
@@ -87,4 +84,5 @@
   padding: 8px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 5;
 }
