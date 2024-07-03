@@ -1,4 +1,3 @@
-"use client";
 import { auth } from "@clerk/nextjs/server";
 import React from "react";
 // import EventForm from "../../../../Components/ProductForm";
