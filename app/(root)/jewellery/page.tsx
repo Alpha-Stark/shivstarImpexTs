@@ -1,25 +1,24 @@
 import { getUserByClerkId } from "@/lib/actions/user.action";
-import AllProducts from "@/Components/AllProducts";
 import { currentUser } from "@clerk/nextjs/server";
 import { SignInButton } from "@clerk/nextjs";
 import { getAllProductsPag } from "@/lib/actions/product.action";
 import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
 import styles from "@/style/productRoutePage.module.css";
+import AllJewellerys from "@/Components/AllJewellerys";
+import { getAllJewelleryPag } from "@/lib/actions/jewellery.action";
 
-type Product = {
+type Jewellery = {
     _id: string;
     name: string;
     description: string;
     price: number;
     photo: string;
-    colorFrom: string;
-    colorTo: string;
-    clarityFrom: string;
-    clarityTo: string;
-    cut: string;
-    fluorescence: string;
-    shape: string;
+    height: string;
+    width: string;
+    carat: string;
+    weight: string;
+    material: string;
     certificate: string;
 };
 
@@ -30,7 +29,7 @@ type Props = {
 async function products({ searchParams }: Props) {
     const page = parseInt(searchParams.page) || 1;
     const query = searchParams.query || '';
-    const res = await getAllProductsPag({ query, limit: 8, page }) as { data: Product[], totalPages: number };
+    const res = await getAllJewelleryPag({ query, limit: 8, page }) as { data: Jewellery[], totalPages: number };
     const data = res.data;
     const totalPages = res.totalPages;
 
@@ -57,7 +56,7 @@ async function products({ searchParams }: Props) {
                 <h1>Jewellery Catalog</h1>
                 <Search placeholder="Search Jewellery by name..." />
             </div>
-            <AllProducts userType={userType} data={data} />
+            <AllJewellerys userType={userType} data={data} />
             <Pagination currentPage={page} totalPages={totalPages} />
         </>
     );

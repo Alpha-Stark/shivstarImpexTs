@@ -1,18 +1,13 @@
 // import CheckoutButton from '@/components/shared/CheckoutButton';
 // import Collection from '@/components/shared/Collection';
 // import { getEventById, getRelatedEventsByCategory } from '@/lib/actions/event.action';
+import { getJewelleryById } from '@/lib/actions/jewellery.action';
 import { getProductById } from '@/lib/actions/product.action';
 import { SearchParamProps } from '@/types';
 import Image from 'next/image';
 
 const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
-    const product = await getProductById(id);
-    /* const relatedEvents = await getRelatedEventsByCategory({
-        categoryId: event.category._id,
-        eventId: event._id,
-        page: searchParams.page as string
-    }) */
-    // console.log(product)
+    const product = await getJewelleryById(id);
 
     return (
         <>
@@ -30,44 +25,37 @@ const ProductDetails = async ({ params: { id }, searchParams }: SearchParamProps
                         <h2 className='text-3xl font-bold'>{product.name}</h2>
 
                         <div className="flex flex-col gap-2">
-                            {product.clarityFrom && (
+                            {product.carat && (
                                 <p className="text-lg font-medium">
-                                    <span className="text-xl font-bold text-gray-600">Clarity: </span>
-                                    <span className="text-primary-500 font-semibold">{product.clarityFrom} {product.clarityTo && `- ${product.clarityTo}`}</span>
+                                    <span className="text-xl font-bold text-gray-600">Carat: </span> {product.carat}
+                                    {/* <span className="text-primary-500 font-semibold">{product.carat}</span> */}
                                 </p>
                             )}
-                            {(product.colorFrom || product.colorTo) && (
+                            {product.weight && (
                                 <p className="text-lg font-medium">
-                                    <span className="text-xl font-bold text-gray-600">Color: </span>
-                                    {product.colorFrom && `${product.colorFrom}`} {product.colorTo && `- ${product.colorTo}`}
+                                    <span className="text-xl font-bold text-gray-600">Weight: </span> {product.weight}
+                                    {/* <span className="text-primary-500 font-semibold">{product.weight}</span> */}
                                 </p>
                             )}
-                            {product.shape && (
+                            {product.width && (
                                 <>
                                     <p className="text-lg font-medium">
-                                        <span className="text-xl font-bold text-gray-600">Shape: </span>
-                                        {product.shape}
+                                        <span className="text-xl font-bold text-gray-600">Width: </span>
+                                        {product.width}
                                     </p>
                                     <p className="text-lg font-medium">
-                                        <span className="text-xl font-bold text-gray-600">Cut: </span>
-                                        {product.cut}
+                                        <span className="text-xl font-bold text-gray-600">Height: </span>
+                                        {product.height}
                                     </p>
                                 </>
                             )}
-                            {product.fluorescence && (
+                            {product.material && (
                                 <p className="text-lg font-medium">
-                                    <span className="text-xl font-bold text-gray-600">Fluorescence: </span>
-                                    {product.fluorescence}
+                                    <span className="text-xl font-bold text-gray-600">Material: </span>
+                                    {product.material}
                                 </p>
                             )}
                         </div>
-
-                        {/* {product.stock && (
-                            <p className="text-lg font-medium">
-                                <span className="text-xl font-bold text-gray-600">Stock: </span>
-                                {product.stock}
-                            </p>
-                        )} */}
 
                         {product.description && (
                             <div className="flex flex-col gap-2">

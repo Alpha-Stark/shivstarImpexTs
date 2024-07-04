@@ -3,6 +3,7 @@ import React from "react";
 // import EventForm from "../../../../Components/ProductForm";
 // import Product from "@/Pages/Product";
 import ProductForm from "@/Components/ProductForm";
+import JewelleryForm from "@/Components/JewelleryForm";
 
 const createEvent = () => {
     /* const { sessionClaims } = auth();
@@ -16,7 +17,7 @@ const createEvent = () => {
             </section>
 
             <div className="container mx-auto px-4 my-8">
-                <ProductForm type="Create" />
+                <JewelleryForm type="Create" />
             </div>
         </>
     );
