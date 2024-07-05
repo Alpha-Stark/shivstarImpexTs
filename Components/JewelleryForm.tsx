@@ -117,14 +117,14 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
 
                 <div className="flex flex-col gap-5 md:flex-row">
                     <div className="w-full">
-                        <FormLabel className="text-base">Product Title</FormLabel>
+                        <FormLabel className="text-base">Jewellery Title</FormLabel>
                         <FormField
                             control={form.control}
                             name="name"
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormControl>
-                                        <Input placeholder="Product title" {...field} className="input-field" />
+                                        <Input placeholder="Jewellery title" {...field} className="input-field" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -143,7 +143,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormControl>
-                                        <Input placeholder="Product title" {...field} className="input-field" />
+                                        <Input placeholder="Jewellery Height" {...field} className="input-field" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -158,7 +158,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormControl>
-                                        <Input placeholder="Product title" {...field} className="input-field" />
+                                        <Input placeholder="Jewellery Width" {...field} className="input-field" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -173,7 +173,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormControl>
-                                        <Input placeholder="Product title" {...field} className="input-field" />
+                                        <Input placeholder="Jewellery Weight" {...field} className="input-field" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -190,7 +190,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormControl>
-                                        <Input placeholder="Product title" {...field} className="input-field" />
+                                        <Input placeholder="Jewellery Carat" {...field} className="input-field" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -236,7 +236,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                             render={({ field }) => (
                                 <FormItem className="w-full">
                                     <FormControl>
-                                        <Input placeholder="Product title" {...field} className="input-field" />
+                                        <Input placeholder="Enter Certificate name" {...field} className="input-field" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -264,18 +264,21 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                 </div>
 
                 <div className="flex flex-col gap-5 md:flex-row">
-                    <FormField
-                        control={form.control}
-                        name="description"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormControl className="h-75">
-                                    <Textarea placeholder="Description" {...field} className="textarea rounded-2xl" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <div className="w-full">
+                        <FormLabel className="text-base">Description</FormLabel>
+                        <FormField
+                            control={form.control}
+                            name="description"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormControl className="h-75">
+                                        <Textarea placeholder="Description" {...field} className="textarea rounded-2xl" />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                     <FormField
                         control={form.control}
                         name="photo"

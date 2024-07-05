@@ -406,18 +406,21 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
                 </div>
 
                 <div className="flex flex-col gap-5 md:flex-row">
-                    <FormField
-                        control={form.control}
-                        name="description"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormControl className="h-75">
-                                    <Textarea placeholder="Description" {...field} className="textarea rounded-2xl" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <div className="w-full">
+                        <FormLabel className="text-base">Description</FormLabel>
+                        <FormField
+                            control={form.control}
+                            name="description"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormControl className="h-75">
+                                        <Textarea placeholder="Description" {...field} className="textarea rounded-2xl" />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                     <FormField
                         control={form.control}
                         name="photo"
