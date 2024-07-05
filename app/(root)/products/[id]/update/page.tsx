@@ -1,6 +1,9 @@
 import ProductForm from "@/Components/ProductForm";
 import { getProductById } from "@/lib/actions/product.action";
-import { auth } from "@clerk/nextjs/server";
+import { getUserByClerkId } from "@/lib/actions/user.action";
+import { SignInButton } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import React from "react";
 
 type UpdateProductProps = {
@@ -13,6 +16,26 @@ const UpdateProduct = async ({ params: { id } }: UpdateProductProps) => {
     // const { sessionClaims } = auth();
     // const userId = sessionClaims?.userId as string; //added question mark because it was showing error that "sessionClaims can be null"
     const product = await getProductById(id);
+
+    const user = await currentUser();
+    if (!user) {
+        return <SignInButton />;
+    }
+    const clerkId = user.id;
+
+    const fetchUserType = async () => {
+        try {
+            const userDetails = await getUserByClerkId(clerkId);
+            return userDetails.userType;
+        } catch (err) {
+            console.error("Failed to fetch user type", err);
+        }
+    };
+
+    let userType = await fetchUserType();
+    if (userType === "user") {
+        redirect(`/products/${product._id}`);
+    }
 
     return (
         <>

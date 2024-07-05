@@ -35,6 +35,8 @@ type jewelleryPropSchema = {
 
 
 const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) => {
+
+
     const initialValues =
         jewellery && type === "Update"
             ? { ...jewellery } : {
