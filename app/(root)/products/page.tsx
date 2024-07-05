@@ -54,7 +54,7 @@ async function products({ searchParams }: Props) {
     return (
         <>
             <div className={styles.heading}>
-                <h1>Product Catalog</h1>
+                <h1>Diamond Catalog</h1>
                 <Search placeholder="Search products by name..." />
             </div>
             <AllProducts userType={userType} data={data} />
