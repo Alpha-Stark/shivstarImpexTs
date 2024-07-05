@@ -7,6 +7,7 @@ import Search from "@/Components/Search";
 import styles from "@/style/productRoutePage.module.css";
 import AllJewellerys from "@/Components/AllJewellerys";
 import { getAllJewelleryPag } from "@/lib/actions/jewellery.action";
+import FloatingButton from "@/Components/FloatingButton";
 
 type Jewellery = {
     _id: string;
@@ -58,6 +59,9 @@ async function products({ searchParams }: Props) {
             </div>
             <AllJewellerys userType={userType} data={data} />
             <Pagination currentPage={page} totalPages={totalPages} />
+            {
+                userType.toLowerCase() === "owner" && <FloatingButton path="/jewellery/create" />
+            }
         </>
     );
 }

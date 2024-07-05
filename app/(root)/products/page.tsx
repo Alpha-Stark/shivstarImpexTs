@@ -6,6 +6,7 @@ import { getAllProductsPag } from "@/lib/actions/product.action";
 import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
 import styles from "@/style/productRoutePage.module.css";
+import FloatingButton from "@/Components/FloatingButton";
 
 type Product = {
     _id: string;
@@ -59,6 +60,9 @@ async function products({ searchParams }: Props) {
             </div>
             <AllProducts userType={userType} data={data} />
             <Pagination currentPage={page} totalPages={totalPages} />
+            {
+                userType.toLowerCase() === "owner" && <FloatingButton path="/products/create" />
+            }
         </>
     );
 }
