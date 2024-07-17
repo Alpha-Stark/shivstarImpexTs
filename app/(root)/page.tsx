@@ -13,7 +13,7 @@ export default function Home() {
             <MainPageMainComponent />
             <NewCollection />
             <CategoriesSection />
-            <Bestseller />
+            {/* <Bestseller /> */}
             <Gifts />
             <Abouts />
         </>
