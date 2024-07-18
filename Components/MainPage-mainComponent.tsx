@@ -7,10 +7,11 @@ export const MainPageMainComponent = () => {
             <div className={styles.hstack}>
                 <div className={styles.vstack}>
                     <h2 className={styles.heading}>
-                        Your Diamond Search Starts Here
+                        Your Diamond Search Start Here
                     </h2>
                     <p className={styles.text}>
-                        Discover the perfect diamond pieces for your unique style at our store
+                        Elevate Your Style With Our Stunning Collection of Lab Grown Diamond
+                        {/* Discover the perfect diamond pieces for your unique style at our store */}
                     </p>
                     <p className={styles.text2}>
                         DISCOVER
