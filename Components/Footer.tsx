@@ -18,7 +18,7 @@ const Footer = () => {
                         <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
                             <Image className={`${styles.imgStyle}`} src={twittericon} alt="Twitter Icon" width={30} height={30} />
                         </a>
-                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/shivstarimpex" target="_blank" rel="noopener noreferrer">
                             <Image className={`${styles.imgStyle}`} src={instaicon} alt="Instagram Icon" width={30} height={30} />
                         </a>
                     </div>
