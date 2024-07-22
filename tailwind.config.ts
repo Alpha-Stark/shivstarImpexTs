@@ -2,6 +2,7 @@
 import { withUt } from 'uploadthing/tw';
 
 module.exports = withUt({
+  // purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './styles/**/*.{css}'],
   darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -9,7 +10,6 @@ module.exports = withUt({
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
-  // purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     container: {
       center: true,
@@ -66,6 +66,7 @@ module.exports = withUt({
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        background: '#ffffff', // Add this line
       },
       fontFamily: {
         poppins: ['var(--font-poppins)'],
