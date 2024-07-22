@@ -17,7 +17,7 @@ export const CategoriesSection = () => {
 
     useEffect(() => {
         // Preload images for better performance
-        const imagesToPreload = [categoryimgRings, categoryimgEarring, categoryimgBracelet, categoryimgWatches, categoryimgMenjewellery, categoryimgPendant];
+        const imagesToPreload = [categoryimgRings, categoryimgEarring, categoryimgBracelet, /* categoryimgWatches, */ categoryimgMenjewellery, categoryimgPendant];
         imagesToPreload.forEach((img) => {
             const image = new window.Image();
             image.src = img.src;
@@ -40,7 +40,7 @@ export const CategoriesSection = () => {
                         <Text className={styles.categoryItem} onMouseEnter={() => handleMouseEnter(categoryimgBracelet)}>Bracelets</Text>
                         <Text className={styles.categoryItem} onMouseEnter={() => handleMouseEnter(categoryimgEarring)}>Earrings</Text>
                         <Text className={styles.categoryItem} onMouseEnter={() => handleMouseEnter(categoryimgPendant)}>Necklaces & Pendants</Text>
-                        <Text className={styles.categoryItem} onMouseEnter={() => handleMouseEnter(categoryimgWatches)}>Watches</Text>
+                        {/* <Text className={styles.categoryItem} onMouseEnter={() => handleMouseEnter(categoryimgWatches)}>Watches</Text> */}
                         <Text className={styles.categoryItem} onMouseEnter={() => handleMouseEnter(categoryimgMenjewellery)}>Men's Jewelry</Text>
                         <Text className={styles.allCategories}>All Categories</Text>
                     </Box>

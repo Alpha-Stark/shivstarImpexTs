@@ -35,7 +35,7 @@ const Footer = () => {
                     <p>Bracelets</p>
                     <p>Earrings</p>
                     <p>Necklaces & Pendants</p>
-                    <p>Watches</p>
+                    {/* <p>Watches</p> */}
                 </div>
                 <div className={`${styles.foot_email_Section__qc_3a} block`}>
                     <h1 style={{ color: "white", fontWeight: "500" }}>Discover the latest collections, news, and exclusive launches</h1>
