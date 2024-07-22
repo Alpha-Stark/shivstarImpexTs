@@ -1,60 +1,43 @@
-"use client"
-// used shadcn form, input, textarea, 
-// Date picker component from (https://www.npmjs.com/package/react-datepicker), there are many different such types, so be cautious
-import * as React from "react"
-import { useState } from "react"
-import Image from "next/image"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+"use client";
 
-// import { Button } from "./ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/Components/ui/form"
-import { Input } from "./ui/input"
-import { Textarea } from "./ui/textarea"
-import { FileUploader } from "./FileUploader"
-
-
-import { useUploadThing } from "@/lib/uploadthing"
-
-import { productFormSchema } from "@/lib/validator"
-import { useRouter } from "next/navigation"
-import { createProduct, updateProduct } from "@/lib/actions/product.action"
-import { Button } from "./ui/button"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select"
-import { Checkbox } from "./ui/checkbox"
-
+import { useState, useCallback } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { FileUploader } from "./FileUploader";
+import styles from "../style/ProductForm.module.css";
+import { useUploadThing } from "@/lib/uploadthing";
+import { productFormSchema } from "@/lib/validator";
+import { useRouter } from "next/navigation";
+import { createProduct, updateProduct } from "@/lib/actions/product.action";
 
 type productFromProps = {
-    type: "Create" | "Update",
+    type: "Create" | "Update";
     product?: {
-        name: string,
-        description: string,
-        price: string,
-        photo: string,
-        colorFrom: string,
-        colorTo: string,
-        clarityFrom: string,
-        clarityTo: string,
-        cut: string,
-        fluorescence: string,
-        shape: string,
-        certificate: string,
-    }
-    productId?: string,
-    // The above both are optional because at the time of event creation, it won't exist and won't be needed.
-}
-
+        name: string;
+        description: string;
+        price: string;
+        photo: string;
+        colorFrom: string;
+        colorTo: string;
+        clarityFrom: string;
+        clarityTo: string;
+        cut: string;
+        fluorescence: string;
+        shape: string;
+        certificate: string;
+    };
+    productId?: string;
+};
 
 const ProductForm = ({ type, product, productId }: productFromProps) => {
-
     const initialValues =
         product && type === "Update"
             ? { ...product }
             : {
                 name: "",
                 description: "",
-                price: "", //price: 0 , to remove error below
+                price: "",
                 photo: "",
                 fluorescence: "",
                 colorFrom: "",
@@ -64,44 +47,34 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
                 cut: "",
                 shape: "",
                 certificate: "None",
-            }
+            };
 
-    const [files, setFiles] = useState<File[]>([])
-    const { startUpload } = useUploadThing('imageUploader') //And this comes from 'Upload Thing' so we have to properly import it specifically/manually
-    const router = useRouter(); //This useRouter() must be from "next/navigation". And not "next/router"
+    const [files, setFiles] = useState<File[]>([]);
+    const { startUpload } = useUploadThing("imageUploader");
+    const router = useRouter();
 
-    // 1. Define your form.
     const form = useForm<z.infer<typeof productFormSchema>>({
         resolver: zodResolver(productFormSchema),
         defaultValues: initialValues,
-    })
+    });
 
-    // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof productFormSchema>) {
-        /* console.log(values) */
-
         let uploadedImageUrl = values.photo;
 
         if (files.length > 0) {
-            const uploadedImages = await startUpload(files); // And this startUpload() has to be defined above that where does it come from (i.e., upload thing).
-
+            const uploadedImages = await startUpload(files);
             if (!uploadedImages) {
                 return;
             }
-
             uploadedImageUrl = uploadedImages[0].url;
         }
 
         if (type === "Create") {
             try {
                 const newProduct = await createProduct({
-                    ...values, photo: uploadedImageUrl,
+                    ...values,
+                    photo: uploadedImageUrl,
                 });
-                /* const newProduct = await createProduct({
-                    product: { ...values, photo: uploadedImageUrl }
-                }); */
-                const test = { ...values, photo: uploadedImageUrl }
-                /* console.log(test) console.log(newProduct) */
                 if (newProduct) {
                     form.reset();
                     router.push(`/products/${newProduct._id}`);
@@ -109,8 +82,7 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
             } catch (error) {
                 console.log(error);
             }
-        }
-        if (type === "Update") {
+        } else if (type === "Update") {
             if (!productId) {
                 router.back();
                 return;
@@ -118,9 +90,9 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
             try {
                 const updatedProduct = await updateProduct(productId, {
                     ...values,
-                    photo: uploadedImageUrl, _id: productId
+                    photo: uploadedImageUrl,
+                    _id: productId,
                 });
-
                 if (updatedProduct) {
                     form.reset();
                     router.push(`/products/${updatedProduct._id}`);
@@ -131,323 +103,250 @@ const ProductForm = ({ type, product, productId }: productFromProps) => {
         }
     }
 
+    const handleFileChange = useCallback(async (fileUrl: string) => {
+        form.setValue("photo", fileUrl);
+    }, [form]);
+
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
-
-                <div className="flex flex-col gap-5 md:flex-row">
-                    <div className="w-full">
-                        <FormLabel className="text-base">Product Title</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Input placeholder="Product title" {...field} className="input-field" />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
+        <form onSubmit={form.handleSubmit(onSubmit)} className={styles.form}>
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Product Title</label>
+                    <input
+                        {...form.register("name")}
+                        placeholder="Product title"
+                        className={styles.inputField}
+                    />
+                    {form.formState.errors.name && (
+                        <p className={styles.errorMessage}>{form.formState.errors.name.message}</p>
+                    )}
                 </div>
-                <div className="flex flex-col gap-5 md:flex-row">
-                    <div className="w-full">
-                        <FormLabel className="text-base">Clarity from</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="clarityFrom"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Clarity" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS">VVS</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
-                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VS">VS</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
-                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="SI3">SI3</SelectItem>
-                                                    <SelectItem value="I1">I1</SelectItem>
-                                                    <SelectItem value="I2">I2</SelectItem><SelectItem value="I3">I3</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
+            </div>
 
-                    <div className="w-full">
-                        <FormLabel className="text-base">Clarity to</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="clarityTo"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Clarity" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Clarity</SelectLabel><SelectItem value="IF">IF</SelectItem><SelectItem value="VVS">VVS</SelectItem><SelectItem value="VVS1">VVS1</SelectItem>
-                                                    <SelectItem value="VVS2">VVS2</SelectItem><SelectItem value="VVS">VVS</SelectItem><SelectItem value="VS">VS</SelectItem><SelectItem value="VS1">VS1</SelectItem><SelectItem value="VS2">VS2</SelectItem>
-                                                    <SelectItem value="SI1">SI1</SelectItem><SelectItem value="SI2">SI2</SelectItem><SelectItem value="SI3">SI3</SelectItem>
-                                                    <SelectItem value="I1">I1</SelectItem>
-                                                    <SelectItem value="I2">I2</SelectItem><SelectItem value="I3">I3</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-                    <div className="w-full">
-                        <FormLabel className="text-base">Color from</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="colorFrom"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Color" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Color</SelectLabel>
-                                                    <SelectItem value="D">D</SelectItem><SelectItem value="E">E</SelectItem><SelectItem value="F">F</SelectItem>
-                                                    <SelectItem value="G">G</SelectItem><SelectItem value="H">H</SelectItem><SelectItem value="I">I</SelectItem>
-                                                    <SelectItem value="J">J</SelectItem><SelectItem value="K">K</SelectItem><SelectItem value="L">L</SelectItem>
-                                                    <SelectItem value="M">M</SelectItem><SelectItem value="N">N</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-
-                    <div className="w-full">
-                        <FormLabel className="text-base">Color to</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="colorTo"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value} >
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Color" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Color</SelectLabel>
-                                                    <SelectItem value="D">D</SelectItem><SelectItem value="E">E</SelectItem><SelectItem value="F">F</SelectItem>
-                                                    <SelectItem value="G">G</SelectItem><SelectItem value="H">H</SelectItem><SelectItem value="I">I</SelectItem>
-                                                    <SelectItem value="J">J</SelectItem><SelectItem value="K">K</SelectItem><SelectItem value="L">L</SelectItem>
-                                                    <SelectItem value="M">M</SelectItem><SelectItem value="N">N</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        {/* There is something wrong in the above code, lets write the correct one which actually takes value as input */}
-                    </div>
-
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Clarity from</label>
+                    <select
+                        {...form.register("clarityFrom")}
+                        className={styles.selectInput}
+                    >
+                        <option value="">Select Clarity</option>
+                        <option value="IF">IF</option>
+                        <option value="VVS">VVS</option>
+                        <option value="VVS1">VVS1</option>
+                        <option value="VVS2">VVS2</option>
+                        <option value="VS">VS</option>
+                        <option value="VS1">VS1</option>
+                        <option value="VS2">VS2</option>
+                        <option value="SI1">SI1</option>
+                        <option value="SI2">SI2</option>
+                        <option value="SI3">SI3</option>
+                        <option value="I1">I1</option>
+                        <option value="I2">I2</option>
+                        <option value="I3">I3</option>
+                    </select>
+                    {form.formState.errors.clarityFrom && (
+                        <p className={styles.errorMessage}>{form.formState.errors.clarityFrom.message}</p>
+                    )}
                 </div>
 
-                <div className="flex flex-col gap-5 md:flex-row">
-                    <div className="w-full">
-                        <FormLabel className="text-base">Fluorescence</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="fluorescence"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Fluorescence" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Fluorescence</SelectLabel><SelectItem value="None">None</SelectItem>
-                                                    <SelectItem value="Faint">Faint</SelectItem><SelectItem value="Medium">Medium</SelectItem>
-                                                    <SelectItem value="Strong">Strong</SelectItem><SelectItem value="Very Strong">Very Strong</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-                    <div className="w-full">
-                        <FormLabel className="text-base">Cut</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="cut"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Cut" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Cut</SelectLabel>
-                                                    <SelectItem value="Excellent">Excellent</SelectItem><SelectItem value="Very Good">Very Good</SelectItem>
-                                                    <SelectItem value="Good">Good</SelectItem><SelectItem value="Fair">Fair</SelectItem><SelectItem value="Poor">Poor</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-
-                    <div className="w-full">
-                        <FormLabel className="text-base">Shape</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="shape"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            {/* <SelectTrigger className="w-[200px]"> */}
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Shape" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Shape</SelectLabel>
-                                                    <SelectItem value="Round">Round</SelectItem><SelectItem value="Princess">Princess</SelectItem><SelectItem value="Emerald">Emerald</SelectItem><SelectItem value="Asscher">Asscher</SelectItem><SelectItem value="Marquise">Marquise</SelectItem>
-                                                    <SelectItem value="Radiant">Radiant</SelectItem><SelectItem value="Pear">Pear</SelectItem><SelectItem value="Heart">Heart</SelectItem><SelectItem value="Cushion">Cushion</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-
-                    <div className="w-full">
-                        <FormLabel className="text-base">Certificate</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="certificate"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Select Certiciate" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Certificate</SelectLabel>
-                                                    <SelectItem value="None">None</SelectItem><SelectItem value="IGI">IGI</SelectItem><SelectItem value="GIA">GIA</SelectItem>
-                                                    <SelectItem value="HRD">HRD</SelectItem><SelectItem value="EGL">EGL</SelectItem><SelectItem value="AGS">AGS</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Clarity to</label>
+                    <select
+                        {...form.register("clarityTo")}
+                        className={styles.selectInput}
+                    >
+                        <option value="">Select Clarity</option>
+                        <option value="IF">IF</option>
+                        <option value="VVS">VVS</option>
+                        <option value="VVS1">VVS1</option>
+                        <option value="VVS2">VVS2</option>
+                        <option value="VS">VS</option>
+                        <option value="VS1">VS1</option>
+                        <option value="VS2">VS2</option>
+                        <option value="SI1">SI1</option>
+                        <option value="SI2">SI2</option>
+                        <option value="SI3">SI3</option>
+                        <option value="I1">I1</option>
+                        <option value="I2">I2</option>
+                        <option value="I3">I3</option>
+                    </select>
+                    {form.formState.errors.clarityTo && (
+                        <p className={styles.errorMessage}>{form.formState.errors.clarityTo.message}</p>
+                    )}
                 </div>
 
-                <div className="flex flex-col gap-5 md:flex-row">
-                    <div className="w-full">
-                        <FormLabel className="text-base">Price</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="price"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl>
-                                        <Input placeholder="Price" {...field} className="input-field" />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Color from</label>
+                    <select
+                        {...form.register("colorFrom")}
+                        className={styles.selectInput}
+                    >
+                        <option value="">Select Color</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                    </select>
+                    {form.formState.errors.colorFrom && (
+                        <p className={styles.errorMessage}>{form.formState.errors.colorFrom.message}</p>
+                    )}
                 </div>
 
-                <div className="flex flex-col gap-5 md:flex-row">
-                    <div className="w-full">
-                        <FormLabel className="text-base">Description</FormLabel>
-                        <FormField
-                            control={form.control}
-                            name="description"
-                            render={({ field }) => (
-                                <FormItem className="w-full">
-                                    <FormControl className="h-75">
-                                        <Textarea placeholder="Description" {...field} className="textarea rounded-2xl" />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-                    <FormField
-                        control={form.control}
-                        name="photo"
-                        render={({ field }) => (
-                            // <FormItem className="w-full">
-                            <FormItem className="flex justify-center items-center w-full h-full">
-                                <FormControl className="flex justify-center items-center h-72 w-full">
-                                    {/* <FileUploader onFieldChange={field.onChange} imageUrl={field.value} setFiles={setFiles} /> */}
-                                    <FileUploader onFieldChange={field.onChange} photo={field.value} setFiles={setFiles} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Color to</label>
+                    <select
+                        {...form.register("colorTo")}
+                        className={styles.selectInput}
+                    >
+                        <option value="">Select Color</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                    </select>
+                    {form.formState.errors.colorTo && (
+                        <p className={styles.errorMessage}>{form.formState.errors.colorTo.message}</p>
+                    )}
+                </div>
+            </div>
+
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Fluorescence</label>
+                    <select
+                        {...form.register("fluorescence")}
+                        className={styles.selectInput}
+                    >
+                        <option value="">Select Fluorescence</option>
+                        <option value="None">None</option>
+                        <option value="Faint">Faint</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Strong">Strong</option>
+                        <option value="Very Strong">Very Strong</option>
+                    </select>
+                    {form.formState.errors.fluorescence && (
+                        <p className={styles.errorMessage}>{form.formState.errors.fluorescence.message}</p>
+                    )}
+                </div>
+
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Cut</label>
+                    <select
+                        {...form.register("cut")}
+                        className={styles.selectInput}
+                    >
+                        <option value="">Select Cut</option>
+                        <option value="Excellent">Excellent</option>
+                        <option value="Very Good">Very Good</option>
+                        <option value="Good">Good</option>
+                        <option value="Fair">Fair</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+                    {form.formState.errors.cut && (
+                        <p className={styles.errorMessage}>{form.formState.errors.cut.message}</p>
+                    )}
+                </div>
+
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Shape</label>
+                    <select
+                        {...form.register("shape")}
+                        className={styles.selectInput}
+                    >
+                        <option value="">Select Shape</option>
+                        <option value="Round">Round</option>
+                        <option value="Princess">Princess</option>
+                        <option value="Emerald">Emerald</option>
+                        <option value="Asscher">Asscher</option>
+                        <option value="Marquise">Marquise</option>
+                        <option value="Radiant">Radiant</option>
+                        <option value="Pear">Pear</option>
+                        <option value="Heart">Heart</option>
+                        <option value="Cushion">Cushion</option>
+                    </select>
+                    {form.formState.errors.shape && (
+                        <p className={styles.errorMessage}>{form.formState.errors.shape.message}</p>
+                    )}
+                </div>
+
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Certificate</label>
+                    <select
+                        {...form.register("certificate")}
+                        className={styles.selectInput}
+                    >
+                        <option value="None">None</option>
+                        <option value="IGI">IGI</option>
+                        <option value="GIA">GIA</option>
+                        <option value="HRD">HRD</option>
+                        <option value="EGL">EGL</option>
+                        <option value="AGS">AGS</option>
+                    </select>
+                    {form.formState.errors.certificate && (
+                        <p className={styles.errorMessage}>{form.formState.errors.certificate.message}</p>
+                    )}
+                </div>
+            </div>
+
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Price</label>
+                    <input
+                        {...form.register("price")}
+                        placeholder="Price"
+                        className={styles.inputField}
+                    />
+                    {form.formState.errors.price && (
+                        <p className={styles.errorMessage}>{form.formState.errors.price.message}</p>
+                    )}
+                </div>
+            </div>
+
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Description</label>
+                    <textarea
+                        {...form.register("description")}
+                        placeholder="Description"
+                        className={styles.textarea}
+                    ></textarea>
+                    {form.formState.errors.description && (
+                        <p className={styles.errorMessage}>{form.formState.errors.description.message}</p>
+                    )}
+                </div>
+                <div className={styles.fullWidth}>
+                    <FileUploader
+                        onFieldChange={handleFileChange}
+                        photo={form.watch("photo")}
+                        setFiles={setFiles}
                     />
                 </div>
+            </div>
 
-                <Button
-                    type="submit"
-                    size="lg"
-                    disabled={form.formState.isSubmitting}
-                    className="button col-span-2 w-full"
-                >
-                    {form.formState.isSubmitting ? "Submitting..." : `${type} Product`}
-                </Button>
-            </form>
-        </Form>
-    )
-}
+            <button
+                type="submit"
+                disabled={form.formState.isSubmitting}
+                className={styles.button}
+            >
+                {form.formState.isSubmitting ? "Submitting..." : `${type} Product`}
+            </button>
+        </form>
+    );
+};
 
-export default ProductForm
+export default ProductForm;
