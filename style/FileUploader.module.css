@@ -1,0 +1,97 @@
+/* FileUploader.module.css */
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bgDark3 {
+    background-color: #1f2937; /* Customize as needed */
+  }
+  
+  .h72 {
+    height: 18rem; /* 72 / 4 = 18rem */
+  }
+  
+  .cursorPointer {
+    cursor: pointer;
+  }
+  
+  .flexCol {
+    flex-direction: column;
+  }
+  
+  .overflowHidden {
+    overflow: hidden;
+  }
+  
+  .roundedXl {
+    border-radius: 0.75rem; /* rounded-xl */
+  }
+  
+  .bgGrey50 {
+    background-color: #f3f4f6; /* bg-grey-50 */
+  }
+  
+  .hFull {
+    height: 100%;
+  }
+  
+  .wFull {
+    width: 100%;
+  }
+  
+  .flex1 {
+    flex: 1;
+  }
+  
+  .objectCover {
+    object-fit: cover;
+  }
+  
+  .objectCenter {
+    object-position: center;
+  }
+  
+  .py5 {
+    padding: 1.25rem 0; /* py-5 */
+  }
+  
+  .textGrey500 {
+    color: #6b7280; /* text-grey-500 */
+  }
+  
+  .mb2 {
+    margin-bottom: 0.5rem; /* mb-2 */
+  }
+  
+  .mt2 {
+    margin-top: 0.5rem; /* mt-2 */
+  }
+  
+  .mb4 {
+    margin-bottom: 1rem; /* mb-4 */
+  }
+  
+  .roundedFull {
+    border-radius: 9999px; /* rounded-full */
+  }
+  
+  .justifyCenter {
+    justify-content: center;
+  }
+  
+  .uploadContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18rem;
+    width: 100%; /* Make it take the full width */
+    cursor: pointer;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 0.75rem; /* rounded-xl */
+    background-color: #f3f4f6; /* bg-grey-50 */
+  }
+  

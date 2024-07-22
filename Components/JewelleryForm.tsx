@@ -172,7 +172,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                     <label className={styles.label}>Material</label>
                     <select
                         {...form.register("material")}
-                        className={styles.inputField}
+                        className={styles.selectInput}
                     >
                         <option value="">Select Material</option>
                         <option value="Gold">Gold</option>
@@ -226,14 +226,12 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                         <p className={styles.errorMessage}>{form.formState.errors.description.message}</p>
                     )}
                 </div>
-                <div className="flex justify-center items-center w-full h-full">
-                    <div className="flex justify-center items-center h-72 w-full">
-                        <FileUploader
-                            onFieldChange={handleFileChange}
-                            photo={form.watch("photo")}
-                            setFiles={setFiles}
-                        />
-                    </div>
+                <div className={styles.fullWidth}>
+                    <FileUploader
+                        onFieldChange={handleFileChange}
+                        photo={form.watch("photo")}
+                        setFiles={setFiles}
+                    />
                 </div>
             </div>
 

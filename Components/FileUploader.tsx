@@ -4,6 +4,7 @@ import { useCallback, Dispatch, SetStateAction } from 'react'
 import { useDropzone } from '@uploadthing/react/hooks'
 import { generateClientDropzoneAccept } from 'uploadthing/client'
 import { Button } from './ui/button'
+import styles from '../style/FileUploader.module.css'
 
 type FileUploaderProps = {
     onFieldChange: (url: string) => void
@@ -28,25 +29,25 @@ export function FileUploader({ photo, onFieldChange, setFiles }: FileUploaderPro
     return (
         <div
             {...getRootProps()}
-            className="flex-center bg-dark-3 flex h-72 cursor-pointer flex-col overflow-hidden rounded-xl bg-grey-50">
-            <input {...getInputProps()} className="cursor-pointer" />
+            className={styles.uploadContainer}>
+            <input {...getInputProps()} className={styles.cursorPointer} />
 
             {photo ? (
-                <div className="flex h-full w-full flex-1 justify-center ">
+                <div className={`${styles.flex} ${styles.hFull} ${styles.wFull} ${styles.flex1} ${styles.justifyCenter}`}>
                     <img
                         src={photo}
                         alt="image"
                         width={250}
                         height={250}
-                        className="w-full object-cover object-center"
+                        className={`${styles.wFull} ${styles.objectCover} ${styles.objectCenter}`}
                     />
                 </div>
             ) : (
-                <div className="flex justify-center items-center flex-col py-5 text-grey-500 h-full">
+                <div className={`${styles.flexCenter} ${styles.flexCol} ${styles.py5} ${styles.textGrey500} ${styles.hFull}`}>
                     <img src="/assets/icons/upload.svg" width={77} height={77} alt="file upload" />
-                    <h3 className="mb-2 mt-2">Drag photo here</h3>
-                    <p className="p-medium-12 mb-4">SVG, PNG, JPG</p>
-                    <Button type="button" className="rounded-full">
+                    <h3 className={`${styles.mb2} ${styles.mt2}`}>Drag photo here</h3>
+                    <p className={styles.mb4}>SVG, PNG, JPG</p>
+                    <Button type="button" className={styles.roundedFull}>
                         Select from computer
                     </Button>
                 </div>
@@ -57,9 +58,9 @@ export function FileUploader({ photo, onFieldChange, setFiles }: FileUploaderPro
 
 const convertFileToUrl = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = error => reject(error);
-        reader.readAsDataURL(file);
-    });
-};
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result as string)
+        reader.onerror = error => reject(error)
+        reader.readAsDataURL(file)
+    })
+}
