@@ -9,6 +9,7 @@ import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FileUploader } from "./FileUploader";
+import styles from "../style/JewelleryForm.module.css";
 
 type jewelleryPropSchema = {
     type: "Create" | "Update";
@@ -104,74 +105,74 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
     }, [form]);
 
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
-            <div className="flex flex-col gap-5 md:flex-row">
-                <div className="w-full">
-                    <label className="text-base">Jewellery Title</label>
+        <form onSubmit={form.handleSubmit(onSubmit)} className={styles.form}>
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Jewellery Title</label>
                     <input
                         {...form.register("name")}
                         placeholder="Jewellery title"
-                        className="input-field w-full"
+                        className={styles.inputField}
                     />
                     {form.formState.errors.name && (
-                        <p className="text-red-500">{form.formState.errors.name.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.name.message}</p>
                     )}
                 </div>
             </div>
 
-            <div className="flex flex-col gap-5 md:flex-row">
-                <div className="w-full">
-                    <label className="text-base">Height</label>
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Height</label>
                     <input
                         {...form.register("height")}
                         placeholder="Jewellery Height"
-                        className="input-field w-full"
+                        className={styles.inputField}
                     />
                     {form.formState.errors.height && (
-                        <p className="text-red-500">{form.formState.errors.height.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.height.message}</p>
                     )}
                 </div>
-                <div className="w-full">
-                    <label className="text-base">Width</label>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Width</label>
                     <input
                         {...form.register("width")}
                         placeholder="Jewellery Width"
-                        className="input-field w-full"
+                        className={styles.inputField}
                     />
                     {form.formState.errors.width && (
-                        <p className="text-red-500">{form.formState.errors.width.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.width.message}</p>
                     )}
                 </div>
-                <div className="w-full">
-                    <label className="text-base">Weight</label>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Weight</label>
                     <input
                         {...form.register("weight")}
                         placeholder="Jewellery Weight"
-                        className="input-field w-full"
+                        className={styles.inputField}
                     />
                     {form.formState.errors.weight && (
-                        <p className="text-red-500">{form.formState.errors.weight.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.weight.message}</p>
                     )}
                 </div>
             </div>
 
-            <div className="flex flex-col gap-5 md:flex-row">
-                <div className="w-full">
-                    <label className="text-base">Carat</label>
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Carat</label>
                     <input
                         {...form.register("carat")}
                         placeholder="Jewellery Carat"
-                        className="input-field w-full"
+                        className={styles.inputField}
                     />
                     {form.formState.errors.carat && (
-                        <p className="text-red-500">{form.formState.errors.carat.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.carat.message}</p>
                     )}
                 </div>
-                <div className="w-full">
-                    <label className="text-base">Material</label>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Material</label>
                     <select
                         {...form.register("material")}
-                        className="select-input w-full"
+                        className={styles.inputField}
                     >
                         <option value="">Select Material</option>
                         <option value="Gold">Gold</option>
@@ -180,55 +181,55 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                         <option value="Platinum">Platinum</option>
                     </select>
                     {form.formState.errors.material && (
-                        <p className="text-red-500">{form.formState.errors.material.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.material.message}</p>
                     )}
                 </div>
             </div>
 
-            <div className="flex flex-col gap-5 md:flex-row">
-                <div className="w-full">
-                    <label className="text-base">Certificate</label>
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Certificate</label>
                     <input
                         {...form.register("certificate")}
                         placeholder="Enter Certificate name"
-                        className="input-field w-full"
+                        className={styles.inputField}
                     />
                     {form.formState.errors.certificate && (
-                        <p className="text-red-500">{form.formState.errors.certificate.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.certificate.message}</p>
                     )}
                 </div>
             </div>
 
-            <div className="flex flex-col gap-5 md:flex-row">
-                <div className="w-full">
-                    <label className="text-base">Price</label>
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Price</label>
                     <input
                         {...form.register("price")}
                         placeholder="Price"
-                        className="input-field w-full"
+                        className={styles.inputField}
                     />
                     {form.formState.errors.price && (
-                        <p className="text-red-500">{form.formState.errors.price.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.price.message}</p>
                     )}
                 </div>
             </div>
 
-            <div className="flex flex-col gap-5 md:flex-row">
-                <div className="w-full">
-                    <label className="text-base">Description</label>
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Description</label>
                     <textarea
                         {...form.register("description")}
                         placeholder="Description"
-                        className="textarea rounded-2xl w-full"
+                        className={styles.textarea}
                     ></textarea>
                     {form.formState.errors.description && (
-                        <p className="text-red-500">{form.formState.errors.description.message}</p>
+                        <p className={styles.errorMessage}>{form.formState.errors.description.message}</p>
                     )}
                 </div>
                 <div className="flex justify-center items-center w-full h-full">
                     <div className="flex justify-center items-center h-72 w-full">
                         <FileUploader
-                            onFieldChange={handleFileChange}  // Note: This change ensures the type matches
+                            onFieldChange={handleFileChange}
                             photo={form.watch("photo")}
                             setFiles={setFiles}
                         />
@@ -239,7 +240,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
             <button
                 type="submit"
                 disabled={form.formState.isSubmitting}
-                className="button col-span-2 w-full bg-blue-500 text-white p-2 rounded"
+                className={styles.button}
             >
                 {form.formState.isSubmitting ? "Submitting..." : `${type} Product`}
             </button>

@@ -1,0 +1,47 @@
+/* JewelleryForm.module.css */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; /* gap-5 */
+  }
+  
+  .formRow {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; /* gap-5 */
+  }
+  
+  .formRowMd {
+    flex-direction: row;
+  }
+  
+  .fullWidth {
+    width: 100%;
+  }
+  
+  .label {
+    font-size: 1rem; /* text-base */
+  }
+  
+  .inputField {
+    width: 100%;
+  }
+  
+  .errorMessage {
+    color: #ff0000; /* text-red-500 */
+  }
+  
+  .textarea {
+    width: 100%;
+    border-radius: 1rem; /* rounded-2xl */
+  }
+  
+  .button {
+    width: 100%;
+    background-color: #3b82f6; /* bg-blue-500 */
+    color: #000000; /* text-black */
+    padding: 0.5rem; /* p-2 */
+    border-radius: 0.25rem; /* rounded */
+  }
+  
