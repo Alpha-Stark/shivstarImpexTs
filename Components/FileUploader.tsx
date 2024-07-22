@@ -1,11 +1,8 @@
 'use client'
 
 import { useCallback, Dispatch, SetStateAction } from 'react'
-// import type { FileWithPath } from '@uploadthing/react'
 import { useDropzone } from '@uploadthing/react/hooks'
 import { generateClientDropzoneAccept } from 'uploadthing/client'
-
-import { convertFileToUrl } from '@/lib/utils'
 import { Button } from './ui/button'
 
 type FileUploaderProps = {
@@ -15,14 +12,17 @@ type FileUploaderProps = {
 }
 
 export function FileUploader({ photo, onFieldChange, setFiles }: FileUploaderProps) {
-    const onDrop = useCallback((acceptedFiles: File[]) => {
+    const onDrop = useCallback(async (acceptedFiles: File[]) => {
         setFiles(acceptedFiles)
-        onFieldChange(convertFileToUrl(acceptedFiles[0]))
-    }, [])
+        if (acceptedFiles.length > 0) {
+            const fileUrl = await convertFileToUrl(acceptedFiles[0])
+            onFieldChange(fileUrl)
+        }
+    }, [setFiles, onFieldChange])
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
-        accept: 'image/*' ? generateClientDropzoneAccept(['image/*']) : undefined,
+        accept: generateClientDropzoneAccept(['image/*']),
     })
 
     return (
@@ -54,3 +54,12 @@ export function FileUploader({ photo, onFieldChange, setFiles }: FileUploaderPro
         </div>
     )
 }
+
+const convertFileToUrl = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
+};

@@ -5,7 +5,7 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { jewelleryFormSchema } from "@/lib/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FileUploader } from "./FileUploader";
@@ -99,10 +99,9 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
         }
     }
 
-    const handleFileChange = (newFiles: File[]) => {
-        setFiles(newFiles);
-        form.setValue("photo", newFiles.length > 0 ? newFiles[0].name : "");
-    };
+    const handleFileChange = useCallback(async (fileUrl: string) => {
+        form.setValue("photo", fileUrl);
+    }, [form]);
 
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
@@ -228,7 +227,11 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                 </div>
                 <div className="flex justify-center items-center w-full h-full">
                     <div className="flex justify-center items-center h-72 w-full">
-                        <FileUploader onFieldChange={handleFileChange} photo={form.value} setFiles={setFiles} />
+                        <FileUploader
+                            onFieldChange={handleFileChange}  // Note: This change ensures the type matches
+                            photo={form.watch("photo")}
+                            setFiles={setFiles}
+                        />
                     </div>
                 </div>
             </div>
