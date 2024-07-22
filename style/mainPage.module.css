@@ -90,8 +90,8 @@
 }
 
 .mainhands {
-  /* background-image: url('../Pics/hands.png'); */
-  background-image: url('../Pics/Diamonds.png');
+  background-image: url('../Pics/hands.png');
+  /* background-image: url('../Pics/Diamonds.png'); */
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
