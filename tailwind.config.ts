@@ -9,6 +9,7 @@ module.exports = withUt({
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     container: {
       center: true,
