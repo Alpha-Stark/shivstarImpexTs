@@ -4,6 +4,8 @@ import { connectToDatabase } from "../database";
 import { revalidatePath } from "next/cache";
 import Jewellery from "../database/models/jewellery.model";
 import exp from "constants";
+import { UTApi } from "uploadthing/server";
+
 
 type jewelleryPropSchema = {
     _id?: string;
@@ -67,7 +69,14 @@ export async function deleteJewellery({ jewelleryId, path }: DeleteJewelleryPara
     try {
         await connectToDatabase();
 
+        const jewelleryPhotoUrl = await Jewellery.findById(jewelleryId).select('photo'); //its position must be before the deletion
         const deletedJewellery = await Jewellery.findByIdAndDelete(jewelleryId);
+        // trime the photo url to get the key from https://utfs.io/f/
+        const key = jewelleryPhotoUrl.photo.split('https://utfs.io/f/')[1];
+        const utApi = new UTApi();
+        // const deleteFromUploadThing = await utApi.deleteFiles(key);
+        await utApi.deleteFiles(key);
+
         if (deletedJewellery) revalidatePath(path)
         // return JSON.parse(JSON.stringify(deletedJewellery));
     }

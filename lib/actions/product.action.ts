@@ -3,6 +3,7 @@ import { handleError } from "../utils";
 import { connectToDatabase } from "../database";
 import { revalidatePath } from "next/cache";
 import Product from "@/lib/database/models/product.model";
+import { UTApi } from "uploadthing/server";
 
 type productPropSchema = {
     _id?: string;
@@ -67,8 +68,14 @@ export async function deleteProduct({ productId, path }: DeleteProductParams) {
     try {
         await connectToDatabase();
 
+        const ProductPhotoUrl = await Product.findById(productId).select('photo'); //its position must be before the deletion
         // Find product to delete
-        const deleteProduct = await Product.findByIdAndDelete(productId);
+        const deleteProduct = await Product.findByIdAndDelete(productId)
+        // trime the photo url to get the key from https://utfs.io/f/
+        const key = ProductPhotoUrl.photo.split('https://utfs.io/f/')[1];
+        const utApi = new UTApi();
+        // const deleteFromUploadThing = await utApi.deleteFiles(key);
+        await utApi.deleteFiles(key);
 
         if (deleteProduct) revalidatePath(path);
 
