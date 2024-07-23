@@ -4,10 +4,8 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { DeleteConfirmation } from './DeleteConfirmation';
 import styles from "@/style/Card.module.css";
-import { DeleteJewelleryConformatio } from './DeleteJewelleryConformatio';
-
+import { DeleteJewelleryConformation } from './DeleteJewelleryConformation';
 
 type jewelleryCardProps = {
     product: {
@@ -52,7 +50,7 @@ const JewelleryCard = ({ product, isOwner }: jewelleryCardProps) => {
                         />
                     </Link>
                     <div onClick={(e) => e.stopPropagation()}>
-                        <DeleteJewelleryConformatio productId={product._id} /> {/*  */}
+                        <DeleteJewelleryConformation productId={product._id} /> {/*  */}
                     </div>
                 </div>
             )}
