@@ -1,0 +1,59 @@
+/* DeleteConfirmation.module.css */
+
+.alertDialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .alertDialogContent {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .alertDialogHeader {
+    margin-bottom: 1rem;
+  }
+  
+  .alertDialogTitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .alertDialogDescription {
+    color: #4B5563; /* text-grey-600 */
+    margin-bottom: 1.5rem;
+  }
+  
+  .alertDialogFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .cancelButton {
+    background-color: #E5E7EB; /* light grey */
+  }
+  
+  .deleteButton {
+    background-color: #EF4444; /* red */
+    color: white;
+  }
+  
