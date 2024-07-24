@@ -14,10 +14,8 @@ type jewelleryCardProps = {
         description: string;
         price: number;
         photo: string;
-        height: string;
-        width: string;
-        carat: string;
-        weight: string;
+        diamondDescription: String,
+        materialDescription: String,
         material: string;
         certificate: string;
     };
@@ -63,7 +61,7 @@ const JewelleryCard = ({ product, isOwner }: jewelleryCardProps) => {
                 <p className={styles.cardName}>{product.name}</p>
                 <p className={styles.cardDescription}>{product.description}</p>
                 <div className={styles.cardAttributes}>
-                    {product.carat && (
+                    {/* {product.carat && (
                         <p><strong>Carat:</strong> {product.carat}</p>
                     )}
                     {product.weight && (
@@ -74,7 +72,7 @@ const JewelleryCard = ({ product, isOwner }: jewelleryCardProps) => {
                     )}
                     {product.height && (
                         <p><strong>Height:</strong> {product.height}</p>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>

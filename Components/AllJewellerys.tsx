@@ -7,10 +7,8 @@ type Jewellery = {
     description: string;
     price: number;
     photo: string;
-    height: string;
-    width: string;
-    carat: string;
-    weight: string;
+    diamondDescription: String,
+    materialDescription: String,
     material: string;
     certificate: string;
 };

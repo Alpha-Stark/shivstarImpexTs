@@ -19,10 +19,8 @@ type jewelleryPropSchema = {
         description: string;
         price: string;
         photo: string;
-        height: string;
-        width: string;
-        carat: string;
-        weight: string;
+        diamondDescription: String,
+        materialDescription: String,
         material: string;
         certificate: string;
     };
@@ -38,10 +36,8 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                 description: "",
                 price: "",
                 photo: "",
-                height: "",
-                width: "",
-                carat: "",
-                weight: "",
+                diamondDescription: "",
+                materialDescription: "",
                 material: "",
                 certificate: "",
             };
@@ -52,7 +48,12 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
 
     const form = useForm<z.infer<typeof jewelleryFormSchema>>({
         resolver: zodResolver(jewelleryFormSchema),
-        defaultValues: initialValues,
+        // defaultValues: initialValues,
+        defaultValues: {
+            ...initialValues,
+            diamondDescription: initialValues.diamondDescription as string,
+            materialDescription: initialValues.materialDescription as string,
+        },
     });
 
     async function onSubmit(values: z.infer<typeof jewelleryFormSchema>) {
@@ -120,7 +121,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                 </div>
             </div>
 
-            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+            {/* <div className={`${styles.formRow} ${styles.formRowMd}`}>
                 <div className={styles.fullWidth}>
                     <label className={styles.label}>Height</label>
                     <input
@@ -154,10 +155,10 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                         <p className={styles.errorMessage}>{form.formState.errors.weight.message}</p>
                     )}
                 </div>
-            </div>
+            </div> */}
 
             <div className={`${styles.formRow} ${styles.formRowMd}`}>
-                <div className={styles.fullWidth}>
+                {/* <div className={styles.fullWidth}>
                     <label className={styles.label}>Carat</label>
                     <input
                         {...form.register("carat")}
@@ -167,7 +168,7 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                     {form.formState.errors.carat && (
                         <p className={styles.errorMessage}>{form.formState.errors.carat.message}</p>
                     )}
-                </div>
+                </div> */}
                 <div className={styles.fullWidth}>
                     <label className={styles.label}>Material</label>
                     <select
@@ -214,6 +215,31 @@ const JewelleryForm = ({ type, jewellery, jewelleryId }: jewelleryPropSchema) =>
                 </div>
             </div>
 
+            <div className={`${styles.formRow} ${styles.formRowMd}`}>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Diamonds Description</label>
+                    <textarea
+                        {...form.register("diamondDescription")}
+                        placeholder="Diamonds Description"
+                        className={styles.textarea}
+                    ></textarea>
+                    {form.formState.errors.description && (
+                        <p className={styles.errorMessage}>{form.formState.errors.description.message}</p>
+                    )}
+                </div>
+                <div className={styles.fullWidth}>
+                    <label className={styles.label}>Materials Description</label>
+                    <textarea
+                        {...form.register("materialDescription")}
+                        placeholder="Materials Description"
+                        className={styles.textarea}
+                    ></textarea>
+                    {form.formState.errors.description && (
+                        <p className={styles.errorMessage}>{form.formState.errors.description.message}</p>
+                    )}
+                </div>
+
+            </div>
             <div className={`${styles.formRow} ${styles.formRowMd}`}>
                 <div className={styles.fullWidth}>
                     <label className={styles.label}>Description</label>

@@ -21,10 +21,8 @@ export const jewelleryFormSchema = z.object({
     description: z.string().max(400, "Description must be at less than 400 characters."),
     price: z.string(),
     photo: z.string(),
-    height: z.string(),
-    width: z.string(),
-    carat: z.string(),
-    weight: z.string(),
+    diamondDescription: z.string(),
+    materialDescription: z.string(),
     material: z.string(),
     certificate: z.string(),
 })

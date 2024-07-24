@@ -13,10 +13,8 @@ type jewelleryPropSchema = {
     description: string;
     price: string;
     photo: string;
-    height: string;
-    width: string;
-    carat: string;
-    weight: string;
+    diamondDescription: String,
+    materialDescription: String,
     material: string;
     certificate: string;
 };
