@@ -59,6 +59,13 @@
 .cardDescription {
   font-size: 16px;
   color: var(--grey-500);
+  /* add an attribute whitespace-pre-line and if the description exceeds certain characters it shows this ...*/
+  white-space: pre-line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .cardAttributes {

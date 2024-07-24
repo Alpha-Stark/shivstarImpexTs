@@ -59,21 +59,8 @@ const JewelleryCard = ({ product, isOwner }: jewelleryCardProps) => {
                     </span>
                 </div>
                 <p className={styles.cardName}>{product.name}</p>
-                <p className={styles.cardDescription}>{product.description}</p>
-                <div className={styles.cardAttributes}>
-                    {/* {product.carat && (
-                        <p><strong>Carat:</strong> {product.carat}</p>
-                    )}
-                    {product.weight && (
-                        <p><strong>Weight:</strong> {product.weight}</p>
-                    )}
-                    {product.width && (
-                        <p><strong>Width:</strong> {product.width}</p>
-                    )}
-                    {product.height && (
-                        <p><strong>Height:</strong> {product.height}</p>
-                    )} */}
-                </div>
+                <p className={styles.cardDescription}>{product.materialDescription}</p>
+
             </div>
         </div>
     );
