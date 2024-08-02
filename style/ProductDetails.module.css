@@ -54,12 +54,12 @@
 }
 
 .priceTag {
-    font-size: 1.5rem;
-    font-weight: semibold;
-    background-color: #ccffbd; /* Green background for price tag */
-    color: #1a3e34; /* Dark green text color */
-    padding: 8px 20px;
-    border-radius: 8px; /* Rounded corners for price tag */
+    font-size: 1.5rem; /* Tailwind text-2xl */
+    font-weight: 600; /* Tailwind font-semibold */
+    background-color: #d1fae5; /* Tailwind bg-green-100 */
+    color: #047857; /* Tailwind text-green-700 */
+    padding: 8px 20px; /* Tailwind px-5 py-2 */
+    border-radius: 8px; /* Tailwind rounded */
 }
 
 .textExtraLarge {
