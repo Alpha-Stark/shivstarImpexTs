@@ -13,18 +13,21 @@
     grid-template-columns: 1fr;
     gap: 8px;
     padding: 20px;
+    margin: 0 auto; /* Centers the grid in the section with auto margins */
+    max-width: 95%; /* Slightly less than full width to ensure margins on sides */
   }
   
   @media (min-width: 768px) {
     .gridContainer {
       grid-template-columns: 1fr 1fr; /* Tailwind md:grid-cols-2 */
-      padding: 40px; /* Tailwind md:p-10 */
+      padding: 40px; /* Increased padding for medium and above screens */
+      max-width: 90%; /* Adjust this value as needed to increase or decrease the total width */
     }
   }
   
   @media (min-width: 1536px) {
     .gridContainer {
-      max-width: 1536px; /* Tailwind 2xl:max-w-7xl */
+      max-width: 1200px; /* More balanced width on larger screens */
     }
   }
   
