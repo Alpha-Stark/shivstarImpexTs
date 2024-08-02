@@ -1,0 +1,194 @@
+/* Container for the entire section */
+.sectionContainer {
+    display: flex;
+    justify-content: center;
+    background-color: #f3f4f6; /* Tailwind bg-primary-50 */
+    background-image: url('/dotted-pattern.png'); /* Tailwind bg-dotted-pattern */
+    background-size: contain; /* Tailwind bg-contain */
+  }
+  
+  /* Container for the grid layout */
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .gridContainer {
+      grid-template-columns: 1fr 1fr; /* Tailwind md:grid-cols-2 */
+      padding: 40px; /* Tailwind md:p-10 */
+    }
+  }
+  
+  @media (min-width: 1536px) {
+    .gridContainer {
+      max-width: 1536px; /* Tailwind 2xl:max-w-7xl */
+    }
+  }
+  
+  /* Styling for the product image */
+  .productImage {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    object-fit: cover; /* Tailwind object-cover */
+    object-position: center; /* Tailwind object-center */
+    border-radius: 8px; /* Tailwind rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tailwind shadow-md */
+  }
+  
+  /* Container for the product details */
+  .detailsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Product name styling */
+  .productName {
+    font-size: 1.875rem; /* Tailwind text-3xl */
+    font-weight: 700; /* Tailwind font-bold */
+  }
+  
+  /* Styling for the price tag */
+  .priceTag {
+    font-size: 1.5rem; /* Tailwind text-2xl */
+    font-weight: 600; /* Tailwind font-semibold */
+    background-color: #d1fae5; /* Tailwind bg-green-100 */
+    color: #047857; /* Tailwind text-green-700 */
+    padding: 8px 20px; /* Tailwind px-5 py-2 */
+    border-radius: 8px; /* Tailwind rounded */
+  }
+  
+  /* General text styling */
+  .textLarge {
+    font-size: 1.125rem; /* Tailwind text-lg */
+  }
+  
+  .textExtraLarge {
+    font-size: 1.25rem; /* Tailwind text-xl */
+    font-weight: 700; /* Tailwind font-bold */
+    color: #4b5563; /* Tailwind text-gray-600 */
+  }
+  
+  .whitespacePreLine {
+    white-space: pre-line;
+  }
+  
+  /* Button styling */
+  .inquireButton {
+    margin-top: 16px;
+    padding: 8px 16px;
+    background-color: #2563eb; /* Tailwind bg-blue-600 */
+    color: #ffffff; /* Tailwind text-white */
+    font-weight: 600; /* Tailwind font-semibold */
+    border-radius: 8px; /* Tailwind rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tailwind shadow-md */
+    transition: background-color 0.2s;
+  }
+  
+  .inquireButton:hover {
+    background-color: #1d4ed8; /* Tailwind hover:bg-blue-700 */
+  }
+  
+  .inquireButton:focus {
+    outline: none;
+    ring: 2px solid #3b82f6; /* Tailwind focus:ring-2 focus:ring-blue-500 */
+    ring-opacity: 0.75; /* Tailwind focus:ring-opacity-75 */
+  }
+  
+  /* Modal styling */
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(75, 85, 99, 0.75); /* Tailwind bg-gray-500 opacity-75 */
+    z-index: 10;
+  }
+  
+  .modalContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+    text-align: center;
+  }
+  
+  @media (min-width: 640px) {
+    .modalContainer {
+      text-align: left; /* Tailwind sm:text-left */
+    }
+  }
+  
+  .modalContent {
+    display: inline-block;
+    background-color: #ffffff; /* Tailwind bg-white */
+    border-radius: 8px; /* Tailwind rounded-lg */
+    overflow: hidden;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Tailwind shadow-xl */
+    transform: translateY(0);
+    transition: all 0.3s ease-out;
+    max-width: 640px; /* Tailwind sm:max-w-lg */
+    width: 100%; /* Tailwind sm:w-full */
+  }
+  
+  .modalHeader {
+    padding: 16px;
+  }
+  
+  .modalTitle {
+    font-size: 1.125rem; /* Tailwind text-lg */
+    font-weight: 600; /* Tailwind font-medium */
+    color: #111827; /* Tailwind text-gray-900 */
+  }
+  
+  .modalBody {
+    padding: 16px;
+  }
+  
+  .modalFooter {
+    background-color: #f9fafb; /* Tailwind bg-gray-50 */
+    padding: 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .closeButton {
+    display: inline-flex;
+    justify-content: center;
+    padding: 8px 16px;
+    background-color: #ffffff; /* Tailwind bg-white */
+    border-radius: 4px; /* Tailwind rounded-md */
+    border: 1px solid #d1d5db; /* Tailwind border-gray-300 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-sm */
+    color: #374151; /* Tailwind text-gray-700 */
+    font-size: 0.875rem; /* Tailwind text-base */
+    font-weight: 500; /* Tailwind font-medium */
+    transition: background-color 0.2s;
+  }
+  
+  .closeButton:hover {
+    background-color: #f3f4f6; /* Tailwind hover:bg-gray-50 */
+  }
+  
+  .closeButton:focus {
+    outline: none;
+    ring: 2px solid #6366f1; /* Tailwind focus:ring-2 focus:ring-indigo-500 */
+    ring-offset: 2px; /* Tailwind focus:ring-offset-2 */
+  }
+  
+  @media (min-width: 640px) {
+    .closeButton {
+      margin-left: 12px; /* Tailwind sm:ml-3 */
+      width: auto; /* Tailwind sm:w-auto */
+    }
+  }
+  
